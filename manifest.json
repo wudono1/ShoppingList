@@ -1,0 +1,11 @@
+{
+    "name": "Shopping List Extension",
+    "version": "0.3.0",
+    "description": "Google Extension that will searech through websites for best prices",
+    "manifest_version": 3,
+    "author": "Donovan Wu and William Zhu",
+    "action":{
+        "default_popup": "index.html",
+        "default_title": "Shopping List"
+    }
+}
