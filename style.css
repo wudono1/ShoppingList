@@ -119,8 +119,45 @@ main {
     width: 100%;
     display: block;
     transition: .4s;
+    background-color: var(--darkest);
+    border: none;
 }
+
 
 #items .item .content .text:not(:read-only) {
     color: var(--pink);
+}
+
+#items .item .actions {
+    display: flex;
+    margin: 0 -0.5rem;
+
+}
+
+.item .actions button {
+    text-transform: unset !important;
+    cursor: pointer;
+    margin: 0 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: .4s;
+}
+
+.item .actions button:hover {
+    opacity: .8;
+}
+
+.item .actions button:active {
+    opacity: .6;
+}
+
+.item .actions .edit {
+    background-image: linear-gradient(to right, var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.item .actions .delete {
+    color: crimson;
 }
