@@ -1,22 +1,66 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta name = "viewport" content = "width=device-width, initial-scale = 1">
-        <title> Shopping List</title>
-        <link rel = "stylesheet" href = "style.css">
-    </head>
+<html Lang = "en">
 
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content = "IE = edge">
+    <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+    <title> Shopping List</title>
+    <link rel = "stylesheet" href = "style.css">
+</head>
 
-        <div class = "container">
-            <div class = "shopping-list">
-                <h2> Shopping List</h2>
-                <div class = "row">
-                    <input type = "text">
-                    
+<body>
+
+    <header>
+        <h1>
+            Shopping List
+        </h1>
+
+        <form id = "new-item-form">             <!-- for user input -->
+            <!-- textbox to enter item -->
+            <input  
+                type = "text"                           
+                id = "new-item-input"
+                placeholder = "Enter item here..."/>
+
+            <!-- submit button -->
+            <input
+                type = "submit"
+                id = "new-item-submit"
+                value = "Add item"
+            />
+        </form>
+    </header>
+
+    <main>
+
+        <section class = "item-list">           <!-- aka "task-list"-->
+            <!-- displays all items in shopping list-->
+            <h2> Shopping List Items</h2>
+
+            <div id = "items">
+                <div class = "item">            <!--aka class "task"-->
+                    <input 
+                        type = "text"
+                        class = "text"
+                        value = "My shiny item"
+                        readonly
+                    />
                 </div>
-            </div>
-        </div>
+                <div class = "actions">
+                    <!-- edit a shopping cart item -->
+                    <button class = "edit"> Edit </button>
 
-    </body>
+                    <!-- delete a shopping cart item -->
+                    <button class = "delete"> Delete </button>
+                </div>
+
+
+            </div>
+        </section>
+    </main>
+
+
+</body>
+
 </html>
