@@ -112,10 +112,15 @@ main {
 
 }
 
+#items .item .content {
+    flex: 1 1 0%;
+}
+
 #items .item .content .text{
     color: var(--light);
     font-size: 1.125rem;
     width: 100%;
+    flex: 1 1 0%;
     display: block;
     transition: .4s;
     background-color: var(--darkest);
