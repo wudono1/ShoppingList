@@ -10,8 +10,6 @@ window.addEventListener('load', () => {
 
         if (!item) {
             alert("Please fill out the item");
-        } else {
-            console.log("Success");
             return;
         }
 
