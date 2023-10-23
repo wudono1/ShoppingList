@@ -87,13 +87,15 @@ window.addEventListener('load', () => {
         e.preventDefault();
 
         const newBudget = budget_input.value;
-        if (isNaN(newBudget)) {
-            console.log("Invalid input");
-        }
-        if (!(isNaN(newBudget))) {
+        if (newBudget && !(isNaN(newBudget))) {
             budget_input.value = newBudget;
+            var div = document.getElementById(elementID);
+            div.innerHTML = "";
+        } else {
+            var div = document.getElementById('invalid-budget-warning');
+            div.innerHTML += 'Budget must be a number';
+            
         }
-
         
     })
 })

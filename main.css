@@ -136,6 +136,9 @@ header h2 {
     opacity: 0.6;
 }
 
+#invalid-budget-warning {
+    color: crimson;
+}
 
 main {
     flex: 1 1 0%;
