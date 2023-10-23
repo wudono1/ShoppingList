@@ -37,9 +37,17 @@ header h1 {
     color: var(--gray);
 }
 
+header h2 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    color: var(--gray);
+}
+
 #new-item-form {
     display: flex;
 }
+
 
 #input, button {
     appearance: none;
@@ -65,13 +73,14 @@ header h1 {
 
 #new-item-submit {
     color: var(--pink);
+    width: 125px;
     font-size: 1.25rem;
     font-weight: 700;
     background-image: linear-gradient(to right, var(--pink), var(--purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     cursor: pointer;
-    transition: 0.4s;
+    transition: 0.3s;
 
 }
 
@@ -83,6 +92,51 @@ header h1 {
     opacity: 0.6;
 }
 
+
+#budget-edit-form {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.budget-edit-header {
+    margin: 0; /* Optional to reset default margin */
+}
+
+#new-budget-input {
+    flex: 1 1 0%;
+    background-color: var(--dark);
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-right: 1rem;
+    color: var(--light);
+    font-size: 1.25rem;
+    height: 2em;
+}
+
+#new-budget-submit {
+    color: var(--pink);
+    width: 200px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    background-image: linear-gradient(to right, var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+    height: 2em;
+}
+
+#new-budget-submit:hover {
+     opacity: .8;
+}
+
+#new-budget-submit:active {
+    opacity: 0.6;
+}
+
+
 main {
     flex: 1 1 0%;
     max-width: 800px;
@@ -90,12 +144,12 @@ main {
     margin: 0 auto;
 }
 
-.item-list {
+.obj-list {
     padding: 1rem;
 
 }
 
-.item-list h2 {
+.obj-list h2 {
     font-size: 2.5rem;
     font-weight: 300;
     margin-bottom: 1rem;

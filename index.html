@@ -31,13 +31,30 @@
                 value = "Add item"
             />
         </form>
+        <form id = "budget-edit-form">             <!-- for user input -->
+            <h2 class = "budget-edit-header"> Budget: $&nbsp;</h2>
+            <!-- textbox to enter budget -->
+            <input  
+                type = "text"   
+                name = "new-item-input"                        
+                id = "new-budget-input"
+                placeholder = "Default budget is $100.."
+            />
+
+            <!-- submit button -->
+            <input
+                type = "submit"
+                id = "new-budget-submit"
+                value = "Change budget"
+            />
+        </form>
     </header>
 
     <main>
 
-        <section class = "item-list">           <!-- aka "task-list"-->
+        <section class = "obj-list">           <!-- aka "task-list"-->
             <!-- displays all items in shopping list-->
-            <h2> Shopping List Items</h2>
+            <h2> Shopping List Items: </h2>
 
             <div id = "items">
 
@@ -59,6 +76,7 @@
                 -->    
             </div>
         </section>
+
     </main>
 
     <script src = "main.js"></script>
