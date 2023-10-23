@@ -92,7 +92,6 @@ header h2 {
     opacity: 0.6;
 }
 
-
 #budget-edit-form {
     padding-top: 1rem;
     display: flex;
@@ -221,4 +220,27 @@ main {
 
 .item .actions .delete {
     color: crimson;
+}
+
+
+#start-shopping-button {
+    color: var(--pink);
+    width: 250px;
+    height: 50px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    background-image: linear-gradient(to right, var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+
+}
+
+#start-shopping-button:hover {
+    opacity: .8;
+}
+
+#start-shopping-button:active {
+   opacity: 0.6;
 }
