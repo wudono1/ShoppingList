@@ -93,6 +93,7 @@ window.addEventListener('load', () => {
             div.innerHTML = "";
         } else {
             var div = document.getElementById('invalid-budget-warning');
+            alert(budget_input.value);
             div.innerHTML += 'Budget must be a number';
             
         }
