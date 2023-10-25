@@ -1,32 +1,99 @@
-<!DOCTYPE html>
-<html>
+
+=======
+<html Lang = "en">
+
 <head>
-    <title>Shopping List</title>
-    <meta charset="utf-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content = "IE = edge">
+    <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+    <title> Shopping List</title>
+    <link rel = "stylesheet" href = "main.css">
 </head>
+
 <body>
-    <div class="container mt-3" style="width: 450px;">
-        <h2 class="text-center">Shopping List</h2>
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Date</th>
-                <th>Country</th>
-                <th>Confirmed</th>
-                <th>Deaths</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td id="date"></td>
-                <td id="areaName"></td>
-                <td id="latestBy"></td>
-                <td id="deathNew"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+
+    <header>
+        <h1>
+            Shopping List
+        </h1>
+
+        <form id = "new-item-form">             <!-- for user input -->
+            <!-- textbox to enter item -->
+            <input  
+                type = "text"   
+                name = "new-item-input"                        
+                id = "new-item-input"
+                placeholder = "Enter item here..."/>
+
+            <!-- submit button -->
+            <input
+                type = "submit"
+                id = "new-item-submit"
+                value = "Add item"
+            />
+        </form>
+        <form id = "budget-edit-form">             <!-- for user input -->
+            <h2 class = "budget-edit-header"> Budget: $&nbsp;</h2>
+            <!-- textbox to enter budget -->
+            <input  
+                type = "text"   
+                name = "new-item-input"                        
+                id = "new-budget-input"
+                placeholder = "Default budget is $100.."
+            />
+
+            <!-- submit button -->
+            <input
+                type = "submit"
+                id = "new-budget-submit"
+                value = "Change budget"
+            />
+        </form>
+
+        <div id = "invalid-budget-warning"></div>
+    </header>
+
+    <main>
+
+        <section class = "obj-list">           <!-- aka "task-list"-->
+            <!-- displays all items in shopping list-->
+            <h2> Shopping List Items: </h2>
+
+            <div id = "items">
+
+                <!-- <div class = "item">        
+                    <div class="content">
+                        <input 
+                            type = "text"
+                            class = "text"
+                            value = "sample item"
+                            readonly> 
+                    </div>
+
+                    <div class = "actions">
+                        <button class = "edit"> Edit </button>
+    
+                        <button class = "delete"> Delete </button>
+                    </div>
+                </div
+                -->    
+            </div>
+        </section>
+
+        <form id = "start-shopping-form">
+            <input
+                type = 'button'
+                id = 'start-shopping-button'
+                value = 'Find your items online!'
+            >
+        </form>
+
+    </main>
+
+    
+
+    <script src = "main.js"></script>
 </body>
-<script src="script.js"></script>
+
+>>>>>>> ba93b8ebc384f1f0d938fb75ee5ff5096ee537d5
 </html>

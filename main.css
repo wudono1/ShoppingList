@@ -1,0 +1,246 @@
+:root {
+    --dark: #374151;
+    --darker: #1f2937;
+    --darkest: #111827;
+    --gray: #6b7280;
+    --light: #eee;
+    --pink: #ec4899;
+    --purple: #8b5cf6;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: 'Fira sans', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: var(--dark); 
+    color: #FFF;
+
+}
+
+header {
+    padding: 2rem 1rem;
+    max-width: 800px;
+    width: 100%;
+    margin:  0 auto;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    color: var(--gray);
+}
+
+header h2 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    color: var(--gray);
+}
+
+#new-item-form {
+    display: flex;
+}
+
+
+#input, button {
+    appearance: none;
+    border: none;
+    outline: none;
+    background: none;
+
+}
+
+#new-item-input {
+    flex: 1 1 0%;
+    background-color: var(--dark);
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-right: 1rem;
+    color: var(--light);
+    font-size: 1.25rem;
+}
+
+#new-item-input::placeholder {
+    color: var(--gray);
+}
+
+#new-item-submit {
+    color: var(--pink);
+    width: 125px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    background-image: linear-gradient(to right, var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+
+}
+
+#new-item-submit:hover {
+     opacity: .8;
+}
+
+#new-item-submit:active {
+    opacity: 0.6;
+}
+
+#budget-edit-form {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.budget-edit-header {
+    margin: 0; /* Optional to reset default margin */
+}
+
+#new-budget-input {
+    flex: 1 1 0%;
+    background-color: var(--dark);
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-right: 1rem;
+    color: var(--light);
+    font-size: 1.25rem;
+    height: 2em;
+}
+
+#new-budget-submit {
+    color: var(--pink);
+    width: 200px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    background-image: linear-gradient(to right, var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+    height: 2em;
+}
+
+#new-budget-submit:hover {
+     opacity: .8;
+}
+
+#new-budget-submit:active {
+    opacity: 0.6;
+}
+
+#invalid-budget-warning {
+    color: crimson;
+}
+
+main {
+    flex: 1 1 0%;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.obj-list {
+    padding: 1rem;
+
+}
+
+.obj-list h2 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    color: var(--gray);
+}
+
+#items .item {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--darkest);
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+
+}
+
+#items .item .content {
+    flex: 1 1 0%;
+}
+
+#items .item .content .text{
+    color: var(--light);
+    font-size: 1.125rem;
+    width: 100%;
+    flex: 1 1 0%;
+    display: block;
+    transition: .4s;
+    background-color: var(--darkest);
+    border: none;
+}
+
+
+#items .item .content .text:not(:read-only) {
+    color: var(--pink);
+}
+
+#items .item .actions {
+    display: flex;
+    margin: 0 -0.5rem;
+
+}
+
+.item .actions button {
+    text-transform: unset !important;
+    cursor: pointer;
+    margin: 0 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: .4s;
+}
+
+.item .actions button:hover {
+    opacity: .8;
+}
+
+.item .actions button:active {
+    opacity: .6;
+}
+
+.item .actions .edit {
+    background-image: linear-gradient(to right, var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.item .actions .delete {
+    color: crimson;
+}
+
+
+#start-shopping-button {
+    color: var(--pink);
+    width: 250px;
+    height: 50px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    background-image: linear-gradient(to right, var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+
+}
+
+#start-shopping-button:hover {
+    opacity: .8;
+}
+
+#start-shopping-button:active {
+   opacity: 0.6;
+}
