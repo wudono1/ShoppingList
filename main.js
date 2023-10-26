@@ -128,4 +128,14 @@ window.addEventListener('load', () => {
         }
         
     })
+    
+    const startShoppingButton = document.getElementById('start-shopping-button');
+    //open new page when start shopping button is clicked
+    startShoppingButton.addEventListener('click', () => {
+        // Replace 'your_new_url_here' with the URL you want to open in a new page
+        const newURL = 'your_new_url_here';
+
+        // Open the new URL in a new tab or window
+        window.open(newURL, '_blank');
+    })
 })
