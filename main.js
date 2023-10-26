@@ -30,7 +30,36 @@ window.addEventListener('load', () => {
             item_input_el.setAttribute("readonly", "readonly");
     
             item_content_el.appendChild(item_input_el);
-    
+
+            //Priority dropdown element
+
+            //adding label to dropdown
+            const label_el = document.createElement("label");
+            label_el.textContent = "Select priority level: ";
+
+            const dropdown_el = document.createElement("select");
+            dropdown_el.classList.add("dropdown");
+
+            //3 options: high, medium, or low priority; default is high priority
+            const option1 = document.createElement("option");
+            option1.value = "high";
+            option1.text = "High";
+
+            const option2 = document.createElement("option");
+            option2.value = "med";
+            option2.text = "Medium";
+
+            const option3 = document.createElement("option");
+            option3.value = "low";
+            option3.text = "Low";
+
+            dropdown_el.appendChild(option1);
+            dropdown_el.appendChild(option2);
+            dropdown_el.appendChild(option3);
+
+            //Adding dropdown to item_el
+            item_el.appendChild(label_el);
+            item_el.appendChild(dropdown_el);
     
             //making actions class for edit and delete buttons
             const item_actions_el = document.createElement("div");
