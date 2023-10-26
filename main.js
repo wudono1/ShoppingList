@@ -35,7 +35,7 @@ window.addEventListener('load', () => {
 
             //adding label to dropdown
             const label_el = document.createElement("label");
-            label_el.textContent = "Select priority level: ";
+            label_el.textContent = "Select priority level:";
 
             const dropdown_el = document.createElement("select");
             dropdown_el.classList.add("dropdown");
