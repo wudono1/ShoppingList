@@ -1,0 +1,95 @@
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+public class FrontendTest {
+
+    private WebDriver driver;
+
+    @Before
+    public void setUp() {
+        System.setProperty("webdriver.chrome.driver", "path_to_chromedriver.exe");
+        driver = new ChromeDriver();
+    }
+
+    @Test
+    public void testAddItemToShoppingList() {
+        driver.get("your_frontend_url_here");
+
+        WebElement itemInput = driver.findElement(By.id("new-item-input"));
+        WebElement submitButton = driver.findElement(By.id("new-item-submit"));
+
+        itemInput.sendKeys("Test Item");
+        submitButton.click();
+
+        WebElement itemList = driver.findElement(By.id("items"));
+        WebElement addedItem = itemList.findElement(By.className("text"));
+        assertEquals("Test Item", addedItem.getAttribute("value"));
+    }
+
+    @Test
+    public void testEditItemInShoppingList() {
+        driver.get("your_frontend_url_here");
+
+        WebElement itemInput = driver.findElement(By.id("new-item-input"));
+        WebElement submitButton = driver.findElement(By.id("new-item-submit"));
+
+        itemInput.sendKeys("Test Item");
+        submitButton.click();
+
+        WebElement editButton = driver.findElement(By.className("edit"));
+        editButton.click();
+
+        WebElement itemInputEditable = driver.findElement(By.className("text"));
+        itemInputEditable.clear();
+        itemInputEditable.sendKeys("Updated Test Item");
+
+        editButton.click();
+
+        WebElement itemList = driver.findElement(By.id("items"));
+        WebElement editedItem = itemList.findElement(By.className("text"));
+        assertEquals("Updated Test Item", editedItem.getAttribute("value"));
+    }
+
+    @Test
+    public void testDeleteItemFromShoppingList() {
+        driver.get("your_frontend_url_here");
+
+        WebElement itemInput = driver.findElement(By.id("new-item-input"));
+        WebElement submitButton = driver.findElement(By.id("new-item-submit"));
+
+        itemInput.sendKeys("Test Item");
+        submitButton.click();
+
+        WebElement deleteButton = driver.findElement(By.className("delete"));
+        deleteButton.click();
+
+        WebElement itemList = driver.findElement(By.id("items"));
+        assertTrue(itemList.findElements(By.className("text")).isEmpty());
+    }
+
+    @Test
+    public void testInvalidBudgetInput() {
+        driver.get("your_frontend_url_here");
+
+        WebElement budgetInput = driver.findElement(By.id("new-budget-input"));
+        WebElement budgetSubmitButton = driver.findElement(By.id("new-budget-submit"));
+
+        budgetInput.sendKeys("Invalid Budget");
+        budgetSubmitButton.click();
+
+        WebElement invalidBudgetWarning = driver.findElement(By.id("invalid-budget-warning"));
+        assertTrue(invalidBudgetWarning.getText().contains("Budget must be a number"));
+    }
+
+    @After
+    public void tearDown() {
+        driver.quit();
+    }
+}
