@@ -8,7 +8,7 @@ def get_title(soup):
 	
 	try:
 		# Outer Tag Object
-		title = soup.find("span", attrs={"id":'productTitle'})
+		title = soup.find("span", attrs={"class":'a-size-medium a-color-base a-text-normal'})
 
 		# Inner NavigableString Object
 		title_value = title.string
@@ -56,23 +56,12 @@ def get_rating(soup):
 # Function to extract Number of User Reviews
 def get_review_count(soup):
 	try:
-		review_count = soup.find("span", attrs={'id':'acrCustomerReviewText'}).string.strip()
+		review_count = soup.find("span", attrs={'class':'a-size-base s-underline-text'}).string.strip()
 		
 	except AttributeError:
 		review_count = ""	
 
 	return review_count
-
-# Function to extract Availability Status
-def get_availability(soup):
-	try:
-		available = soup.find("div", attrs={'id':'availability'})
-		available = available.find("span").string.strip()
-
-	except AttributeError:
-		available = ""	
-
-	return available	
 
 if __name__ == '__main__':
 
@@ -96,6 +85,5 @@ if __name__ == '__main__':
 	print("Product Price =", get_price(soup))
 	print("Product Rating =", get_rating(soup))
 	print("Number of Product Reviews =", get_review_count(soup))
-	print("Availability =", get_availability(soup))
 	print()
 	print()
