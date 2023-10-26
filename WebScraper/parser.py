@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
 
+user_input = input("Please enter an item: ")
 
-user_input = input("Please enter a URL: ")
 # Function to extract Product Title
 def get_title(soup):
 	
@@ -10,7 +10,7 @@ def get_title(soup):
 		# Outer Tag Object
 		title = soup.find("span", attrs={"id":'productTitle'})
 
-		# Inner NavigatableString Object
+		# Inner NavigableString Object
 		title_value = title.string
 
 		# Title as a string value
@@ -31,16 +31,10 @@ def get_title(soup):
 def get_price(soup):
 
 	try:
-		price = soup.find("span", attrs={'id':'priceblock_ourprice'}).string.strip()
+		price = soup.find("span", attrs={'class':'a-offscreen'}).string.strip()
 
 	except AttributeError:
-
-		try:
-			# If there is some deal price
-			price = soup.find("span", attrs={'id':'priceblock_dealprice'}).string.strip()
-
-		except:		
-			price = ""	
+		price = ""	
 
 	return price
 
@@ -76,50 +70,32 @@ def get_availability(soup):
 		available = available.find("span").string.strip()
 
 	except AttributeError:
-		available = "Not Available"	
+		available = ""	
 
 	return available	
 
-
 if __name__ == '__main__':
 
+	search_url = "https://www.amazon.com" + f"/s?k={user_input.replace(' ', '+')}"
 	# Headers for request
 	HEADERS = ({'User-Agent':
 	            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
-	            'Accept-Language': 'en-US'})
+	            'Accept-Language': 'en-US, en;q=0.5'})
 
 	# The webpage URL
-	URL = user_input
-	
+	URL = search_url
+
 	# HTTP Request
 	webpage = requests.get(URL, headers=HEADERS)
 
 	# Soup Object containing all data
 	soup = BeautifulSoup(webpage.content, "lxml")
 
-	# Fetch links as List of Tag Objects
-	links = soup.find_all("a", attrs={'class':'a-link-normal s-no-outline'})
-
-	# Store the links
-	links_list = []
-
-	# Loop for extracting links from Tag Objects
-	for link in links:
-		links_list.append(link.get('href'))
-
-
-	# Loop for extracting product details from each link 
-	for link in links_list:
-
-		new_webpage = requests.get("https://www.amazon.com" + link, headers=HEADERS)
-
-		new_soup = BeautifulSoup(new_webpage.content, "lxml")
-		
-		# Function calls to display all necessary product information
-		print("Product Title =", get_title(new_soup))
-		print("Product Price =", get_price(new_soup))
-		print("Product Rating =", get_rating(new_soup))
-		print("Number of Product Reviews =", get_review_count(new_soup))
-		print("Availability =", get_availability(new_soup))
-		print()
-		print()
+	# Function calls to display all necessary product information
+	print("Product Title =", get_title(soup))
+	print("Product Price =", get_price(soup))
+	print("Product Rating =", get_rating(soup))
+	print("Number of Product Reviews =", get_review_count(soup))
+	print("Availability =", get_availability(soup))
+	print()
+	print()
