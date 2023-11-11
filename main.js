@@ -8,6 +8,8 @@ window.addEventListener('load', () => {
     const budget_form = document.querySelector('#budget-edit-form');
     const budget_input = document.querySelector('#new-budget-input');
 
+    const lastValidBudget = '';
+
     item_form.addEventListener('submit', (e) => {    //logic for pressing submit button
         e.preventDefault();
 
@@ -116,18 +118,16 @@ window.addEventListener('load', () => {
         e.preventDefault();
 
         const newBudget = budget_input.value;
-        if (newBudget && !(isNaN(newBudget))) {
+        const warningDiv = document.getElementById('invalid-budget-warning');
+
+        if (newBudget && !isNaN(newBudget)) {
             budget_input.value = newBudget;
-            var div = document.getElementById(elementID);
-            div.innerHTML = "";
+            warningDiv.innerHTML = ''; // Clear the warning message
         } else {
-            var div = document.getElementById('invalid-budget-warning');
-            alert(budget_input.value);
-            div.innerHTML += 'Budget must be a number';
-            
+            budget_input.value = ''; // Clear the input value
+            warningDiv.innerHTML = 'Budget must be a number';
         }
-        
-    })
+    });
     
     const startShoppingButton = document.getElementById('start-shopping-button');
     //open new page when start shopping button is clicked
