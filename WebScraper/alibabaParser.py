@@ -63,7 +63,7 @@ def get_url(soup):
 
 if __name__ == '__main__':
 
-	search_url = "https://www.alibaba.com" + f"/trade/search?spm=a2700.galleryofferlist.pageModule_fy23_pc_search_bar.keydown__Enter&tab=all&searchText={user_input.replace(' ', '+')}"
+	'''search_url = "https://www.alibaba.com" + f"/trade/search?spm=a2700.galleryofferlist.pageModule_fy23_pc_search_bar.keydown__Enter&tab=all&searchText={user_input.replace(' ', '+')}"
 	# Headers for request
 	HEADERS = ({'User-Agent':
 	            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
@@ -82,7 +82,8 @@ if __name__ == '__main__':
 	print("Product URL =", get_url(soup))
 	print(URL)
 	print()
-	print()
+	print()'''
+	getLinkAndPrice(user_input)
 	cov.stop()
 	cov.save()
 	cov.report()
