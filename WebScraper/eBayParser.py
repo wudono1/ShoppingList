@@ -1,5 +1,9 @@
 from bs4 import BeautifulSoup
 import requests, json, lxml
+import coverage
+#Import the code coverage class so data can be run when this class is called
+cov = coverage.Coverage()
+cov.start()
 
 headers = {
     "User-Agent":
@@ -79,3 +83,7 @@ if __name__ == '__main__':
     test_item = "dog food"
     user_search_URL = "https://www.ebay.com" + f"/sch/{test_item.replace(' ', '+')}"
     get_organic_results(user_search_URL)
+    cov.save
+    cov.stop
+    # Generate and print a coverage report
+    cov.report

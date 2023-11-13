@@ -1,31 +1,12 @@
 from bs4 import BeautifulSoup
 import requests
+import coverage
+#Import the code coverage class so data can be run when this class is called
+cov = coverage.Coverage()
+cov.start()
+
 
 user_input = input("Please enter an item: ")
-
-# Function to extract Product Title
-def get_title(soup):
-	
-	try:
-		# Outer Tag Object
-		title = soup.find('h2', attrs={'data-aplus-auto-card-mod': 'area=title&areaContent=2row&target=detail'})
-
-		# Inner NavigableString Object
-		title_value = title.string
-
-		# Title as a string value
-		title_string = title_value.strip()
-
-		# # Printing types of values for efficient understanding
-		# print(type(title))
-		# print(type(title_value))
-		# print(type(title_string))
-		# print()
-
-	except AttributeError:
-		title_string = ""	
-
-	return title_string
 
 # Function to extract Product Price
 def get_price(soup):
@@ -38,30 +19,16 @@ def get_price(soup):
 
 	return price
 
-# Function to extract Product Rating
-def get_rating(soup):
-
+# Function to extract Product url
+def get_url(soup):
 	try:
-		rating = soup.find("i", attrs={'class':'.seb-supplier-review__score'}).string.strip()
+		url_a = soup.find('a', class_='search-card-e-slider__link search-card-e-slider__gallery')
+		url_value = url_a.get('href') if url_a else None
 		
 	except AttributeError:
-		
-		try:
-			rating = soup.find("span", attrs={'class':'a-icon-alt'}).string.strip()
-		except:
-			rating = ""	
+		url_value = ""	
 
-	return rating
-
-# Function to extract image url
-def get_image(soup):
-	try:
-		image_url = soup.find("span", attrs={'class':'.seb-img-switcher__imgs img'}).string.strip()
-		
-	except AttributeError:
-		image_url = ""	
-
-	return image_url
+	return url_value
 
 if __name__ == '__main__':
 
@@ -70,8 +37,7 @@ if __name__ == '__main__':
 	HEADERS = ({'User-Agent':
 	            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
 	            'Accept-Language': 'en-US, en;q=0.5'})
-
-	# The webpage URL
+    # The webpage URL
 	URL = search_url
 
 	# HTTP Request
@@ -81,10 +47,11 @@ if __name__ == '__main__':
 	soup = BeautifulSoup(webpage.content, "lxml")
 
 	# Function calls to display all necessary product information
-	print("Product Title =", get_title(soup))
 	print("Product Price =", get_price(soup))
-	print("Product Rating =", get_rating(soup))
-	print("Number of Product Reviews =", get_image(soup))
+	print("Product URL =", get_url(soup))
 	print(URL)
 	print()
 	print()
+	cov.stop()
+	cov.save()
+	cov.report()
