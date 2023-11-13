@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-import requests
+import requests, json
 import coverage
 #Import the code coverage class so data can be run when this class is called
 cov = coverage.Coverage()
@@ -8,7 +8,7 @@ cov.start()
 
 user_input = input("Please enter an item: ")
 
-def getAll(item):
+def getLinkAndPrice(item):
 	# The webpage URL
 	URL = "https://www.alibaba.com" + f"/trade/search?spm=a2700.galleryofferlist.pageModule_fy23_pc_search_bar.keydown__Enter&tab=all&searchText={item.replace(' ', '+')}"
 	# Headers for request
@@ -19,12 +19,25 @@ def getAll(item):
 	# HTTP Request
 	webpage = requests.get(URL, headers=HEADERS)
 
+	data = []
+
 	# Soup Object containing all data
 	soup = BeautifulSoup(webpage.content, "lxml")
 
-	for item in soup.select(".gallery-card-layout-info"):
-		item_title = soup.select_one("")
+	for item in soup.select(".card-info"):
+		title = soup.select_one(".search-card-e-title").text
 		link = item.select_one('.search-card-e-detail-wrapper')['href']
+		
+		try:
+			price = item.select_one('.search-card-e-price-main').text
+		except:
+			price = None
+		data.append({
+            'item': {'title': title, 'link': link, 'price': price}
+        })
+
+	print(json.dumps(data, indent = 2, ensure_ascii = False))
+		
 
 # Function to extract Product Price
 def get_price(soup):
