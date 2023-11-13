@@ -1,9 +1,5 @@
 from bs4 import BeautifulSoup
 import requests
-import coverage
-#Import the code coverage class so data can be run when this class is called
-cov = coverage.Coverage()
-cov.start()
 
 user_input = input("Please enter an item: ")
 
@@ -12,7 +8,7 @@ def get_title(soup):
 	
 	try:
 		# Outer Tag Object
-		title = soup.find("span", attrs={"class":'a-size-base-plus a-color-base a-text-normal'})
+		title = soup.find('h2', attrs={'data-aplus-auto-card-mod': 'area=title&areaContent=2row&target=detail'})
 
 		# Inner NavigableString Object
 		title_value = title.string
@@ -35,7 +31,7 @@ def get_title(soup):
 def get_price(soup):
 
 	try:
-		price = soup.find("span", attrs={'class':'a-offscreen'}).string.strip()
+		price = soup.find('div', class_='search-card-e-price-main').string.strip()
 
 	except AttributeError:
 		price = ""	
@@ -46,7 +42,7 @@ def get_price(soup):
 def get_rating(soup):
 
 	try:
-		rating = soup.find("i", attrs={'class':'a-icon a-icon-star a-star-4-5'}).string.strip()
+		rating = soup.find("i", attrs={'class':'.seb-supplier-review__score'}).string.strip()
 		
 	except AttributeError:
 		
@@ -57,19 +53,19 @@ def get_rating(soup):
 
 	return rating
 
-# Function to extract Number of User Reviews
-def get_review_count(soup):
+# Function to extract image url
+def get_image(soup):
 	try:
-		review_count = soup.find("span", attrs={'class':'a-size-base s-underline-text'}).string.strip()
+		image_url = soup.find("span", attrs={'class':'.seb-img-switcher__imgs img'}).string.strip()
 		
 	except AttributeError:
-		review_count = ""	
+		image_url = ""	
 
-	return review_count
+	return image_url
 
 if __name__ == '__main__':
 
-	search_url = "https://www.amazon.com" + f"/s?k={user_input.replace(' ', '+')}"
+	search_url = "https://www.alibaba.com" + f"/trade/search?spm=a2700.galleryofferlist.pageModule_fy23_pc_search_bar.keydown__Enter&tab=all&searchText={user_input.replace(' ', '+')}"
 	# Headers for request
 	HEADERS = ({'User-Agent':
 	            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
@@ -88,12 +84,7 @@ if __name__ == '__main__':
 	print("Product Title =", get_title(soup))
 	print("Product Price =", get_price(soup))
 	print("Product Rating =", get_rating(soup))
-	print("Number of Product Reviews =", get_review_count(soup))
+	print("Number of Product Reviews =", get_image(soup))
 	print(URL)
 	print()
 	print()
-
-	cov.stop()
-	cov.save()
-    # Generate and print a coverage report
-	cov.report()
