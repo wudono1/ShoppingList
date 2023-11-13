@@ -21,7 +21,7 @@ def get_organic_results(user_search_URL):
         title = item.select_one('.s-item__title').text
         link = item.select_one('.s-item__link')['href']
 
-        try:
+        '''try:
             condition = item.select_one('.SECONDARY_INFO').text
         except:
             condition = None
@@ -64,7 +64,7 @@ def get_organic_results(user_search_URL):
         try:
             exctention_buy_now = item.select_one('.s-item__purchase-options-with-icon').text
         except:
-            exctention_buy_now = None
+            exctention_buy_now = None'''
 
         try:
             price = item.select_one('.s-item__price').text
@@ -77,9 +77,10 @@ def get_organic_results(user_search_URL):
 
     print(json.dumps(data, indent = 2, ensure_ascii = False))
 
-if __name__ == '__main__':
+#if __name__ == '__main__':
     
     #item = input("Enter an item: ")
+    '''
     test_item = "dog food"
     user_search_URL = "https://www.ebay.com" + f"/sch/{test_item.replace(' ', '+')}"
     get_organic_results(user_search_URL)
@@ -87,3 +88,4 @@ if __name__ == '__main__':
     cov.stop
     # Generate and print a coverage report
     cov.report
+    '''

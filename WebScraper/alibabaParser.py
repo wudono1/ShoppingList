@@ -8,6 +8,24 @@ cov.start()
 
 user_input = input("Please enter an item: ")
 
+def getAll(item):
+	# The webpage URL
+	URL = "https://www.alibaba.com" + f"/trade/search?spm=a2700.galleryofferlist.pageModule_fy23_pc_search_bar.keydown__Enter&tab=all&searchText={item.replace(' ', '+')}"
+	# Headers for request
+	HEADERS = ({'User-Agent':
+	            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
+	            'Accept-Language': 'en-US, en;q=0.5'})
+
+	# HTTP Request
+	webpage = requests.get(URL, headers=HEADERS)
+
+	# Soup Object containing all data
+	soup = BeautifulSoup(webpage.content, "lxml")
+
+	for item in soup.select(".gallery-card-layout-info"):
+		item_title = soup.select_one("")
+		link = item.select_one('.search-card-e-detail-wrapper')['href']
+
 # Function to extract Product Price
 def get_price(soup):
 
