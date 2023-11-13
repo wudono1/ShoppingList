@@ -1,0 +1,38 @@
+import unittest
+from unittest.mock import patch, Mock
+from eBayParser import get_organic_results
+
+class TestGetOrganicResults(unittest.TestCase):
+
+    @patch('eBayParser.requests.get')
+    def test_get_organic_results(self, mock_get):
+        # Define the HTML response you want to mock
+        mock_html_response = "<html>Your mocked HTML response here</html>"
+
+        # Set up the mock response object
+        mock_response = Mock()
+        mock_response.text = mock_html_response
+
+        # Configure the mock to return the mocked response
+        mock_get.return_value = mock_response
+
+        # Define the test input
+        test_item = "dog food"
+        user_search_URL = "https://www.ebay.com" + f"/sch/{test_item.replace(' ', '+')}"
+
+       # Call the function with the mocked request
+        result = get_organic_results(user_search_URL)
+
+        # Assertions based on the expected behavior
+        self.assertIsInstance(result, list)  # Ensure the result is a list
+
+        if result:  # Check if there are any items in the result list
+            first_item = result[0]['item']
+
+            self.assertIsInstance(first_item, dict)  # Ensure each item is a dictionary
+            self.assertIn('title', first_item)     # Ensure each item has a 'title' key
+            self.assertIn('link', first_item)      # Ensure each item has a 'link' key
+            self.assertIn('price', first_item)     # Ensure each item has a 'price' key
+
+if __name__ == '__main__':
+    unittest.main()
