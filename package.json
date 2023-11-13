@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "chai": "^4.3.10",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0"
+  },
+  "scripts": {
+    "test": "nyc mocha test.js",
+    "coverage": "nyc --reporter=html mocha test.js"
+  }
+}
