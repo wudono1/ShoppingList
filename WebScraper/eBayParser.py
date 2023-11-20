@@ -77,10 +77,10 @@ def get_organic_results(user_search_URL):
 
     print(json.dumps(data, indent = 2, ensure_ascii = False))
 
-#if __name__ == '__main__':
+if __name__ == '__main__':
     
     #item = input("Enter an item: ")
-    '''
+    
     test_item = "dog food"
     user_search_URL = "https://www.ebay.com" + f"/sch/{test_item.replace(' ', '+')}"
     get_organic_results(user_search_URL)
@@ -88,4 +88,4 @@ def get_organic_results(user_search_URL):
     cov.stop
     # Generate and print a coverage report
     cov.report
-    '''
+    

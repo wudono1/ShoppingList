@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c2300a4-8ce6-4fc9-a073-4650cb12ef05" name="Changes" comment="" />
+    <list default="true" id="0c2300a4-8ce6-4fc9-a073-4650cb12ef05" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebScraper/eBayParser.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebScraper/eBayParser.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,6 +51,7 @@
       <workItem from="1698342748065" duration="19000" />
       <workItem from="1699587168111" duration="599000" />
       <workItem from="1699827209321" duration="3000" />
+      <workItem from="1699927874905" duration="599000" />
     </task>
     <servers />
   </component>
