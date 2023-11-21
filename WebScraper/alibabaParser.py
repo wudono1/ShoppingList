@@ -28,6 +28,7 @@ def getLinkAndPrice(item):
 
     for item_elem in soup.select(".card-info"):
         title_element = item_elem.select_one('.search-card-e-title a')
+		
         if title_element:
             title = title_element.get_text(strip=True)
             link = item_elem.select_one('.search-card-e-detail-wrapper')['href']
