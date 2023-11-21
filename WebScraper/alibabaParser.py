@@ -26,6 +26,7 @@ def getLinkAndPrice(item):
     # Soup Object containing all data
     soup = BeautifulSoup(webpage.content, "lxml")
 
+
     for item_elem in soup.select(".card-info"):
         title_element = item_elem.select_one('.search-card-e-title a')
 		
@@ -37,12 +38,10 @@ def getLinkAndPrice(item):
                 price = item_elem.select_one('.search-card-e-price-main').text
             except:
                 price = None
-            
-            data.append({
-                'item': {'title': title, 'link': link, 'price': price}
-            })
-
-    print(json.dumps(data, indent=2, ensure_ascii=False))
+        data.append({
+			'item': {'title': title, 'link': link, 'price': price}
+		})
+        print(json.dumps(data, indent=2, ensure_ascii=False))
 		
 
 # Function to extract Product Price

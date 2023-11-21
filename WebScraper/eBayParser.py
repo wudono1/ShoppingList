@@ -14,6 +14,7 @@ headers = {
 def get_organic_results(user_search_URL):
     html = requests.get(user_search_URL, headers=headers).text
     soup = BeautifulSoup(html, 'lxml')
+    
 
     data = []
 
