@@ -1,12 +1,43 @@
 from bs4 import BeautifulSoup
 import requests
 import coverage
+import json
 
 # Import the code coverage class so data can be run when this class is called
 cov = coverage.Coverage()
 cov.start()
 
 user_input = input("Please enter an item: ")
+
+
+def getAllAttrs(search_url):
+    HEADERS = ({
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
+        'Accept-Language': 'en-US, en;q=0.5'
+    })
+    # Headers for request
+
+    # HTTP Request
+    webpage = requests.get(search_url, headers=HEADERS)
+
+    # Soup Object containing all data
+    soup = BeautifulSoup(webpage.content, "lxml")
+
+    data = []
+
+    for item_elem in soup.select(".puis-v2hrdt6w0jdtp122jn0441sgwu4"):
+        title_element = item_elem.select_one('.a-size-medium.a-color-base.a-text-normal')
+        #link = item_elem.css.select_one('.a-link-normal.s-underline-text')['href']
+            
+        try:
+            price = item_elem.css.select_one('.a-price-whole')
+        except:
+            price = None
+        data.append({
+            'item': {'title': title_element, 'link': "link", 'price': "price"}
+		})
+    print(json.dumps(data, indent=2, ensure_ascii=False))
+          
 
 # Function to extract Product Title
 def get_title(soup):
@@ -61,13 +92,16 @@ def get_review_count(soup):
     '''
 
 if __name__ == '__main__':
+    
     search_url = "https://www.amazon.com" + f"/s?k={user_input.replace(' ', '+')}"
+    
     # Headers for request
     HEADERS = ({
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
         'Accept-Language': 'en-US, en;q=0.5'
     })
-
+    
+    '''
     # HTTP Request
     webpage = requests.get(search_url, headers=HEADERS)
 
@@ -97,6 +131,8 @@ if __name__ == '__main__':
         #print("Number of Product Reviews =", get_review_count(new_soup))
         print()
         print()
+    '''
+    getAllAttrs(search_url)
 
     cov.stop()
     cov.save()

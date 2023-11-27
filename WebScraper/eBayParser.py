@@ -73,10 +73,11 @@ def get_organic_results(user_search_URL):
             price = None
 
         data.append({
-            'item': {'title': title, 'link': link, 'price': price}
+            'item': {'title': title, 'link': link, 'price': float(price[price.rfind("$") + 1:])}
         })
 
-    print(json.dumps(data, indent = 2, ensure_ascii = False))
+    #print(json.dumps(data, indent = 2, ensure_ascii = False))
+    print(data)
 
 if __name__ == '__main__':
     
