@@ -24,6 +24,9 @@ def getAll(search_url):
 	# Soup Object containing all data
 	soup = BeautifulSoup(webpage.content, "lxml")
 	for item_elem in soup.select(".card-info.list-card-layout__info"):
+		print('----------------------------------------')
+		print(item_elem)
+		'''
 		title_element = item_elem.select_one('.search-card-e-title a')
 		
 		if title_element:
@@ -38,8 +41,7 @@ def getAll(search_url):
 			'item': {'title': title, 'link': link, 'price': float(price[price.rfind("$") + 1:])}
 		})
 		print(json.dumps(data, indent=2, ensure_ascii=False))
-	
-	
+'''	
 
 
 '''
