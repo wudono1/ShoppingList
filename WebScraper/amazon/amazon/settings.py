@@ -17,6 +17,13 @@ EXTENSIONS = {
 'scrapeops_scrapy.extension.ScrapeOpsMonitor': 500, 
 }
 
+FEEDS = { 
+    "amazonItems.json": { 
+        'format': 'json',
+        'overwrite' : 'TRUE'
+    }
+    }
+
 LOG_LEVEL = 'INFO'
 
 DOWNLOADER_MIDDLEWARES = {

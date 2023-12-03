@@ -3,11 +3,8 @@ import scrapy
 from urllib.parse import urljoin
 
 class amazonSearchSpider(scrapy.Spider):
-    keyword_list = ['ipad']
+    keyword_list = ['iphone']
     name = "amazon"
-    custom_settings = {
-        'FEEDS': { 'amazonItems.json': { 'format': 'json',}}
-    }
     
     def start_requests(self):
         for keyword in self.keyword_list:
@@ -31,8 +28,6 @@ class amazonSearchSpider(scrapy.Spider):
                     "ad": True if "/slredirect/" in product_url else False, 
                     "title": product.css("h2>a>span::text").get(),
                     "price": product.css(".a-price[data-a-size=xl] .a-offscreen::text").get(),
-                    "real_price": product.css(".a-price[data-a-size=b] .a-offscreen::text").get(),
                     "rating": (product.css("span[aria-label~=stars]::attr(aria-label)").re(r"(\d+\.*\d*) out") or [None])[0],
-                    "rating_count": product.css("span[aria-label~=stars] + span::attr(aria-label)").get(),
-                    "thumbnail_url": product.xpath("//img[has-class('s-image')]/@src").get(),
                 }
+
