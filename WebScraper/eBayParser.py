@@ -22,51 +22,6 @@ def get_organic_results(user_search_URL):
         title = item.select_one('.s-item__title').text
         link = item.select_one('.s-item__link')['href']
 
-        '''try:
-            condition = item.select_one('.SECONDARY_INFO').text
-        except:
-            condition = None
-
-        try:
-            shipping = item.select_one('.s-item__logisticsCost').text
-        except:
-            shipping = None
-
-        try:
-            location = item.select_one('.s-item__itemLocation').text
-        except:
-            location = None
-
-        try:
-            watchers_sold = item.select_one('.NEGATIVE').text
-        except:
-            watchers_sold = None
-
-        if item.select_one('.s-item__etrs-badge-seller') is not None:
-            top_rated = True
-        else:
-            top_rated = False
-
-        try:
-            bid_count = item.select_one('.s-item__bidCount').text
-        except:
-            bid_count = None
-
-        try:
-            bid_time_left = item.select_one('.s-item__time-left').text
-        except:
-            bid_time_left = None
-
-        try:
-            reviews = item.select_one('.s-item__reviews-count span').text.split(' ')[0]
-        except:
-            reviews = None
-
-        try:
-            exctention_buy_now = item.select_one('.s-item__purchase-options-with-icon').text
-        except:
-            exctention_buy_now = None'''
-
         try:
             price = item.select_one('.s-item__price').text
         except:

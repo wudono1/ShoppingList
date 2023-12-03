@@ -9,34 +9,36 @@ cov.start()
 
 user_input = input("Please enter an item: ")
 
+HEADERS = ({
+    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
+    'Accept-Language': 'en-US, en;q=0.5'
+})
 
-def getAllAttrs(search_url):
-    HEADERS = ({
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
-        'Accept-Language': 'en-US, en;q=0.5'
-    })
-    # Headers for request
 
-    # HTTP Request
-    webpage = requests.get(search_url, headers=HEADERS)
-
-    # Soup Object containing all data
-    soup = BeautifulSoup(webpage.content, "lxml")
+def get_organic_results(user_search_URL):
+    html = requests.get(user_search_URL, headers=HEADERS).text
+    soup = BeautifulSoup(html, 'lxml')
+    
 
     data = []
 
-    for item_elem in soup.select(".puis-v2hrdt6w0jdtp122jn0441sgwu4"):
-        title_element = item_elem.select_one('.a-size-medium.a-color-base.a-text-normal')
-        #link = item_elem.css.select_one('.a-link-normal.s-underline-text')['href']
-            
+    for item in soup.select('.puis-padding-right-micro'):
+        print(item)
+        '''       
+        title = item.select_one('.a-size-base-plus .a-color-base .a-text-normal').text
+        link = item.select_one('.a-link-normal .s-underline-text .s-underline-link-text .s-link-style .a-text-normal')['href']
+
         try:
-            price = item_elem.css.select_one('.a-price-whole')
+            price = item.select_one('.a-offscreen').text
         except:
             price = None
+
         data.append({
-            'item': {'title': title_element, 'link': "link", 'price': "price"}
-		})
-    print(json.dumps(data, indent=2, ensure_ascii=False))
+            'item': {'title': title, 'link': link, 'price': float(price[price.rfind("$") + 1:])}
+        })
+        '''
+    #print(json.dumps(data, indent = 2, ensure_ascii = False))
+    print(data)
           
 
 # Function to extract Product Title
@@ -66,42 +68,14 @@ def get_price(soup):
 
     return price
 
-''' Function to extract Product Rating
-def get_rating(soup):
-    try:
-        rating = soup.find("span", attrs={'class': 'a-size-base a-color-base'}).string.strip()
-
-    except AttributeError:
-        try:
-            rating = soup.find("span", attrs={'class': 'a-icon a-icon-star a-star-4-5'}).string.strip()
-        except:
-            rating = ""
-
-    return rating
-    '''
-
-'''Function to extract Number of User Reviews
-def get_review_count(soup):
-    try:
-        review_count = soup.find("span", attrs={'class': 'a-size-base'}).string.strip()
-
-    except AttributeError:
-        review_count = ""
-
-    return review_count
-    '''
 
 if __name__ == '__main__':
-    
+    '''
     search_url = "https://www.amazon.com" + f"/s?k={user_input.replace(' ', '+')}"
     
     # Headers for request
-    HEADERS = ({
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
-        'Accept-Language': 'en-US, en;q=0.5'
-    })
     
-    '''
+    
     # HTTP Request
     webpage = requests.get(search_url, headers=HEADERS)
 
@@ -132,7 +106,42 @@ if __name__ == '__main__':
         print()
         print()
     '''
-    getAllAttrs(search_url)
+
+    headers = {
+        "access-control-allow-credentials": "true",
+        "access-control-allow-origin": "*",
+        "content-length": "2085",
+        "content-type": "application/json",
+        "date": "Sat, 02 Dec 2023 23:18:18 GMT",
+        "expect-ct": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\"",
+        "replit-cluster": "global",
+        "server": "RapidAPI-1.2.8",
+        "strict-transport-security": "max-age=7095596; includeSubDomains",
+        "x-rapidapi-region": "AWS - us-east-1",
+        "x-rapidapi-version": "1.2.8",
+        "x-ratelimit-rapid-free-plans-hard-limit-limit": "500000",
+        "x-ratelimit-rapid-free-plans-hard-limit-remaining": "499993",
+        "x-ratelimit-rapid-free-plans-hard-limit-reset": "2002207",
+        "x-ratelimit-requests-limit": "500000",
+        "x-ratelimit-requests-remaining": "499993",
+        "x-ratelimit-requests-reset": "2002207"
+}
+
+    url = "https://dripcrawler.p.rapidapi.com/"
+
+    payload = {
+        "url": "https://www.amazon.com/s?k=phone&page=1",
+        "javascript_rendering": "False"
+    }
+    headers = {
+        "content-type": "application/json",
+        "X-RapidAPI-Key": "fd741e6270mshf71dc7aeb399912p1935b1jsn086c169e3203",
+        "X-RapidAPI-Host": "dripcrawler.p.rapidapi.com"
+    }
+
+    response = requests.post(url, json=payload, headers=headers)
+
+    print(response.json())
 
     cov.stop()
     cov.save()
