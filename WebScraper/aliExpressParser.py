@@ -18,18 +18,24 @@ def get_organic_results(user_search_URL):
 
     data = []
 
-    for item in soup.select('.s-item__wrapper.clearfix'):
-        title = item.select_one('.s-item__title').text
-        link = item.select_one('.s-item__link')['href']
+    for item in soup.select('.search-item-card-wrapper-gallery'):
+        title = item.select_one('.multi--titleText--nXeOvyr').text
+        link = item.select_one('.search-card-item')['href']
 
         try:
-            price = item.select_one('.s-item__price').text
+            price_el = item.select_one('.multi--price-sale--U-S0jtj')
+            price = price_el.select('span')[1].text + price_el.select('span')[2].text + price_el.select('span')[3].text
         except:
             price = None
 
         data.append({
+            'item': {'title': title, 'link': link, 'price': price}
+        })
+        '''
+        data.append({
             'item': {'title': title, 'link': link, 'price': float(price[price.rfind("$") + 1:])}
         })
+        '''
 
     #print(json.dumps(data, indent = 2, ensure_ascii = False))
     print(data)
@@ -38,8 +44,8 @@ if __name__ == '__main__':
     
     #item = input("Enter an item: ")
     
-    test_item = "dog food"
-    user_search_URL = "https://www.ebay.com" + f"/sch/{test_item.replace(' ', '+')}"
+    test_item = "water bottle"
+    user_search_URL = "https://aliexpress.us/w/wholesale-" + f"{test_item.replace(' ', '-')}" + ".html"
     get_organic_results(user_search_URL)
     cov.save
     cov.stop
