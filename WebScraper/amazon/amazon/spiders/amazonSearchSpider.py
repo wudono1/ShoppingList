@@ -3,12 +3,12 @@ import scrapy
 from urllib.parse import urljoin
 
 class amazonSearchSpider(scrapy.Spider):
-    keyword_list = ['iphone']
+    keyword_list = ['napkins']
     name = "amazon"
     
     def start_requests(self):
         for keyword in self.keyword_list:
-            amazon_search_url = f'https://www.amazon.com/s?k={keyword}&page=1'
+            amazon_search_url = "https://www.amazon.com" + f"/s?k={keyword.replace(' ', '+')}"
             yield scrapy.Request(url=amazon_search_url, callback=self.parse_search_results, meta={'keyword': keyword, 'page': 1})
 
     def parse_search_results(self, response):
