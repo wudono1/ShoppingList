@@ -1,6 +1,5 @@
 import sys
 import os
-#sys.path.append('/ShoppingList/WebScraper/amazon/amazon')
 current_dir = os.path.dirname(os.path.abspath(__file__))
 amazon_scrapy_dir = os.path.join(current_dir, '..', 'amazon', 'amazon')
 sys.path.append(amazon_scrapy_dir)
@@ -13,7 +12,8 @@ from scrapy.crawler import CrawlerProcess
 from amazon.amazon.spiders.amazonSearchSpider import amazonSearchSpider  # Import your spider class
 
 def run_spider(item):
-    output_path = os.path.join('WebScraper', 'amazonItems.json')
+    #Output path for amazon scraper data
+    output_path = os.path.join('scraperData', 'amazonItemOutput.json')
     
 
     #crawler settings
