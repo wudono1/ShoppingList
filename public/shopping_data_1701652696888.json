@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "text": "bread",
+      "priority": "high"
+    },
+    {
+      "text": "computer",
+      "priority": "med"
+    },
+    {
+      "text": "socks",
+      "priority": "low"
+    }
+  ],
+  "budget": "500"
+}
