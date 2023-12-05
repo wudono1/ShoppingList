@@ -25,7 +25,7 @@ def get_organic_results(user_search_URL):
 
         try:
             price_el = item.select_one('.multi--price-sale--U-S0jtj')
-            price = price_el.select('span')[1].text + price_el.select('span')[2].text + price_el.select('span')[3].text
+            price = float(price_el.select('span')[1].text + price_el.select('span')[2].text + price_el.select('span')[3].text)
         except:
             price = None
 
