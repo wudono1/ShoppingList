@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests, json, lxml
 import coverage
 #Import the code coverage class so data can be run when this class is called
+import os
 cov = coverage.Coverage()
 cov.start()
 
@@ -24,21 +25,25 @@ def get_organic_results(user_search_URL):
 
         try:
             price_el = item.select_one('.multi--price-sale--U-S0jtj')
-            price = price_el.select('span')[1].text + price_el.select('span')[2].text + price_el.select('span')[3].text
+            price = float(price_el.select('span')[1].text + price_el.select('span')[2].text + price_el.select('span')[3].text)
         except:
             price = None
 
-        data.append({
-            'item': {'title': title, 'link': link, 'price': price}
-        })
+        data.append(
+            {'title': title, 'link': link, 'price': price}
+        )
         '''
         data.append({
             'item': {'title': title, 'link': link, 'price': float(price[price.rfind("$") + 1:])}
         })
         '''
 
-    #print(json.dumps(data, indent = 2, ensure_ascii = False))
-    print(data)
+    #writing data to JSON file
+    output_path = os.path.join('scraperData', 'aliExpItemOutput.json')
+    with open(output_path, 'w') as outfile:
+        json.dump(data, outfile,indent=4)
+    
+    print(json.dumps(data, indent = 2, ensure_ascii = False))
 
 if __name__ == '__main__':
     

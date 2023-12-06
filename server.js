@@ -12,6 +12,9 @@ const filename = 'shopping_data.json'; // Use a fixed filename
 app.post('/save-json', express.json(), (req, res) => {
   const jsonData = req.body;
 
+  // Create a unique filename (you can customize this logic)
+  const filename = `shopping_data.json`;
+
   const filePath = path.join(__dirname, 'public', filename);
 
   fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), (err) => {
