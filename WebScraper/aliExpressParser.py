@@ -12,7 +12,7 @@ headers = {
 }
 
 
-def get_organic_results(user_search_URL):
+def get_organic_results_alie(user_search_URL):
     html = requests.get(user_search_URL, headers=headers).text
     soup = BeautifulSoup(html, 'lxml')
     
@@ -39,11 +39,13 @@ def get_organic_results(user_search_URL):
         '''
 
     #writing data to JSON file
-    output_path = os.path.join('scraperData', 'aliExpItemOutput.json')
+    '''output_path = os.path.join('scraperData', 'aliExpItemOutput.json')
     with open(output_path, 'w') as outfile:
-        json.dump(data, outfile,indent=4)
+        json.dump(data, outfile,indent=4)'''
     
-    print(json.dumps(data, indent = 2, ensure_ascii = False))
+    #print(json.dumps(data, indent = 2, ensure_ascii = False))
+    print(data)
+    return data
 
 if __name__ == '__main__':
     
@@ -51,7 +53,7 @@ if __name__ == '__main__':
     
     test_item = "water bottle"
     user_search_URL = "https://aliexpress.us/w/wholesale-" + f"{test_item.replace(' ', '-')}" + ".html"
-    get_organic_results(user_search_URL)
+    get_organic_results_alie(user_search_URL)
     cov.save
     cov.stop
     # Generate and print a coverage report

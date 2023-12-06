@@ -11,9 +11,9 @@ sys.path.append(amazon_scrapy_dir)
 from scrapy.crawler import CrawlerProcess
 from WebScraper.amazon.amazon.spiders.amazonSearchSpider import amazonSearchSpider  # Import your spider class
 
-def run_spider(item):
+def run_spider_amazon(item):
     #Output path for amazon scraper data
-    output_path = os.path.join('scraperData', 'amazonItemOutput.json')
+    output_path = os.path.join('scraperData', 'amazonItems.json')
     
 
     #crawler settings
@@ -43,7 +43,7 @@ def run_spider(item):
     process.start()
 
 if __name__ == "__main__":
-    run_spider("phone case")
+    run_spider_amazon("phone case")
 
 
 '''

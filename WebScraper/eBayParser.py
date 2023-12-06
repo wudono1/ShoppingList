@@ -14,7 +14,7 @@ headers = {
 }
 
 
-def get_organic_results(user_search_URL):
+def get_organic_results_ebay(user_search_URL):
     #returns title, link, price of a product listing
 
     html = requests.get(user_search_URL, headers=headers).text
@@ -24,6 +24,7 @@ def get_organic_results(user_search_URL):
     data = []
 
     #searching thru products from ebay search tab
+    index = 0
     for item in soup.select('.s-item__wrapper.clearfix'):
         title = item.select_one('.s-item__title').text
         link = item.select_one('.s-item__link')['href']
@@ -34,24 +35,28 @@ def get_organic_results(user_search_URL):
             price = None
 
     #appending data
-        data.append(
-            {'title': title, 'link': link, 'price': float(price[price.rfind("$") + 1:])}
-        )
+        if (title != "Shop on eBay"):
+            data.append(
+                {'title': title, 'link': link, 'price': float(price[price.rfind("$") + 1:])}
+            )
+            index += 1
 
     #writing data to JSON file
-    output_path = os.path.join('scraperData', 'eBayItemOutput.json')
+    '''output_path = os.path.join('scraperData', 'eBayItemOutput.json')
     with open(output_path, 'w') as outfile:
-        json.dump(data, outfile,indent=4)
+        json.dump(data, outfile,indent=4)'''
 
-    print(json.dumps(data, indent = 2, ensure_ascii = False))
+    #print(json.dumps(data, indent = 2, ensure_ascii = False))
+    print(data)
+    return data
 
 if __name__ == '__main__':
     
     #item = input("Enter an item: ")
     
-    test_item = "cat food"
+    test_item = "water bottle"
     user_search_URL = "https://www.ebay.com" + f"/sch/{test_item.replace(' ', '+')}"
-    get_organic_results(user_search_URL)
+    get_organic_results_ebay(user_search_URL)
     cov.save
     cov.stop
     # Generate and print a coverage report
