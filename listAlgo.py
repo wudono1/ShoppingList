@@ -1,4 +1,7 @@
-from eBayParser import get_organic_results
+from WebScraper.eBayParser import get_organic_results
+from WebScraper.amazonParserCaller import run_spider
+from WebScraper.aliExpressParser import get_organic_results
+
 import sys
 
 def lowestItemListing(amazonList, alibabaList, ebayList):
