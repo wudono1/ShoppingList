@@ -7,6 +7,8 @@ const port = 3000;
 
 app.use(express.static('public')); // Serve static files from the 'public' directory
 
+const filename = 'shopping_data.json'; // Use a fixed filename
+
 app.post('/save-json', express.json(), (req, res) => {
   const jsonData = req.body;
 
