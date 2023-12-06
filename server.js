@@ -11,7 +11,7 @@ app.post('/save-json', express.json(), (req, res) => {
   const jsonData = req.body;
 
   // Create a unique filename (you can customize this logic)
-  const filename = `shopping_data_${Date.now()}.json`;
+  const filename = `shopping_data.json`;
 
   const filePath = path.join(__dirname, 'public', filename);
 
