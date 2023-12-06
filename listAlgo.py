@@ -1,30 +1,23 @@
 from WebScraper.eBayParser import get_organic_results
-from WebScraper.amazonParserCaller import run_spider
+from amazonParserCaller import run_spider
 from WebScraper.aliExpressParser import get_organic_results
-
+import json
 import sys
 
-def lowestItemListing(amazonList, alibabaList, ebayList):
-    lowestListing = None
-    lowestPrice = sys.maxint
-
-
-    for item in amazonList: #finding cheapest amazon listing
-        if item["price"] < lowestPrice:
-            lowestPrice = item["price"]
-            lowestListing = item
-
-    for item2 in alibabaList: #finding cheapest alibaba listing
-        if item2["price"] < lowestPrice:
-            lowestPrice = item2["price"]
-            lowestListing = item2
-
-    for item3 in ebayList: #finding cheapest ebay listing
-        if item3["price"] < lowestPrice:
-            lowestPrice = item3["price"]
-            lowestListing = item3
+def getAllItems():
+    # Path to your JSON file
+    file_path = 'public/shopping_data.json'
     
-    return lowestListing
+
+    # Open the JSON file and load its contents
+    with open(file_path, 'r') as file:
+        data = json.load(file)
+
+    # Now 'data' contains the contents of your JSON file
+    print(data)  # You can work with the data as needed
+
 
 def maximizeBudget():
     pass
+
+lowestItemListing()

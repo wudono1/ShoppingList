@@ -1,7 +1,7 @@
 import sys
 import os
 current_dir = os.path.dirname(os.path.abspath(__file__))
-amazon_scrapy_dir = os.path.join(current_dir, '..', 'amazon', 'amazon')
+amazon_scrapy_dir = os.path.join(current_dir, '..', 'WebScraper', 'amazon', 'amazon')
 sys.path.append(amazon_scrapy_dir)
 #sys.path.append('/ShoppingList/WebScraper/amazon/amazon')
 
@@ -9,7 +9,7 @@ sys.path.append(amazon_scrapy_dir)
 #calls the scrapy amazon spider from within the amazon folder
 
 from scrapy.crawler import CrawlerProcess
-from amazon.amazon.spiders.amazonSearchSpider import amazonSearchSpider  # Import your spider class
+from WebScraper.amazon.amazon.spiders.amazonSearchSpider import amazonSearchSpider  # Import your spider class
 
 def run_spider(item):
     #Output path for amazon scraper data
@@ -19,8 +19,8 @@ def run_spider(item):
     #crawler settings
     process = CrawlerProcess(settings={
         'BOT_NAME': 'amazon',
-        'SPIDER_MODULES': ['amazon.amazon.spiders'],
-        'NEWSPIDER_MODULE': 'amazon.amazon.spiders',
+        'SPIDER_MODULES': ['WebScraper.amazon.amazon.spiders'],
+        'NEWSPIDER_MODULE': 'WebScraper.amazon.amazon.spiders',
         'ROBOTSTXT_OBEY': False,
         'SCRAPEOPS_API_KEY': '25c0074e-bf96-4973-9b74-a23998bb266a',
         'SCRAPEOPS_PROXY_ENABLED': True,
@@ -43,7 +43,7 @@ def run_spider(item):
     process.start()
 
 if __name__ == "__main__":
-    run_spider("ring")
+    run_spider("phone case")
 
 
 '''

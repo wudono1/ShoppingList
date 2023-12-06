@@ -1,17 +1,13 @@
 {
   "items": [
     {
-      "text": "window",
-      "priority": "high"
+      "text": "123",
+      "priority": "med"
     },
     {
-      "text": "comuter",
-      "priority": "high"
-    },
-    {
-      "text": "socks",
-      "priority": "high"
+      "text": "234",
+      "priority": "low"
     }
   ],
-  "budget": "1000"
+  "budget": "6676"
 }
