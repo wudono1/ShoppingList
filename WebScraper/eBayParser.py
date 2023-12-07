@@ -14,51 +14,65 @@ headers = {
 }
 
 
-def get_organic_results_ebay(user_search_URL):
+def get_organic_results_ebay(user_search_url):
     #returns title, link, price of a product listing
 
-    html = requests.get(user_search_URL, headers=headers).text
+    html = requests.get(user_search_url, headers=headers).text
     soup = BeautifulSoup(html, 'lxml')
     
 
     data = []
 
     #searching thru products from ebay search tab
-    index = 0
     for item in soup.select('.s-item__wrapper.clearfix'):
-        title = item.select_one('.s-item__title').text
-        link = item.select_one('.s-item__link')['href']
+        try:
+            title = item.select_one('.s-item__title').text
+        except:
+            title = None
+        try:
+            link = item.select_one('.s-item__link')['href']
+        except:
+            link = None
 
         try:
             price = item.select_one('.s-item__price').text
+            price = float(price[price.rfind("$") + 1:])
         except:
             price = None
 
     #appending data
-        if (title != "Shop on eBay"):
+        if (title != "Shop on eBay" and title != None and link != None and price != None):
             data.append(
-                {'title': title, 'link': link, 'price': float(price[price.rfind("$") + 1:])}
+                {'title': title, 'link': link, 'price': price}
             )
-            index += 1
 
     #writing data to JSON file
-    '''output_path = os.path.join('scraperData', 'eBayItemOutput.json')
+    '''
+    output_path = os.path.join('scraperData', 'eBayItemOutput.json')
     with open(output_path, 'w') as outfile:
-        json.dump(data, outfile,indent=4)'''
-
+        json.dump(data, outfile,indent=4)
+'''
     #print(json.dumps(data, indent = 2, ensure_ascii = False))
-    print(data)
+    #print(data)
     return data
-
+'''
+test_item = "water bottle"
+user_search_URL = "https://www.ebay.com" + f"/sch/{test_item.replace(' ', '+')}"
+results = get_organic_results_ebay(user_search_URL)
+print(results[1])
+'''
+'''
 if __name__ == '__main__':
     
     #item = input("Enter an item: ")
     
     test_item = "water bottle"
-    user_search_URL = "https://www.ebay.com" + f"/sch/{test_item.replace(' ', '+')}"
-    get_organic_results_ebay(user_search_URL)
+    #user_search_URL = "https://www.ebay.com" + f"/sch/{test_item.replace(' ', '+')}"
+    #get_organic_results_ebay(user_search_URL)
+    get_organic_results_ebay(test_item)
+    
     cov.save
     cov.stop
     # Generate and print a coverage report
     cov.report
-    
+'''

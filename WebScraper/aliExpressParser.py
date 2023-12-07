@@ -3,7 +3,9 @@ import requests, json, lxml
 import coverage
 #Import the code coverage class so data can be run when this class is called
 import os
-cov = coverage.Coverage()
+
+
+cov = coverage.Coverage() #for testing
 cov.start()
 
 headers = {
@@ -20,8 +22,15 @@ def get_organic_results_alie(user_search_URL):
     data = []
 
     for item in soup.select('.search-item-card-wrapper-gallery'):
-        title = item.select_one('.multi--titleText--nXeOvyr').text
-        link = item.select_one('.search-card-item')['href']
+        try:
+            title = item.select_one('.multi--titleText--nXeOvyr').text
+        except:
+            title = None
+
+        try:
+            link = item.select_one('.search-card-item')['href']
+        except:
+            link = None
 
         try:
             price_el = item.select_one('.multi--price-sale--U-S0jtj')
@@ -29,33 +38,35 @@ def get_organic_results_alie(user_search_URL):
         except:
             price = None
 
-        data.append(
-            {'title': title, 'link': link, 'price': price}
-        )
-        '''
-        data.append({
-            'item': {'title': title, 'link': link, 'price': float(price[price.rfind("$") + 1:])}
-        })
-        '''
+        if (title != None and link != None and price != None):
+            data.append(
+                {'title': title, 'link': link, 'price': price}
+            )
 
+        
+    '''
     #writing data to JSON file
-    '''output_path = os.path.join('scraperData', 'aliExpItemOutput.json')
+    output_path = os.path.join('scraperData', 'aliExpItemOutput.json')
     with open(output_path, 'w') as outfile:
-        json.dump(data, outfile,indent=4)'''
+        json.dump(data, outfile,indent=4)
     
     #print(json.dumps(data, indent = 2, ensure_ascii = False))
     print(data)
+    '''
     return data
 
+
+'''
 if __name__ == '__main__':
     
     #item = input("Enter an item: ")
     
-    test_item = "water bottle"
+    test_item = "bottle"
     user_search_URL = "https://aliexpress.us/w/wholesale-" + f"{test_item.replace(' ', '-')}" + ".html"
-    get_organic_results_alie(user_search_URL)
-    cov.save
+    #get_organic_results_alie(user_search_URL)
+    
+    cov.save    #for testing
     cov.stop
     # Generate and print a coverage report
     cov.report
-    
+'''
