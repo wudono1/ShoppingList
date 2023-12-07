@@ -18,9 +18,10 @@ def getItemsFindCheapest():
     with open(file_path, 'r') as file:
         data = json.load(file)
         userItems = data["items"]               #finding user items
-        budget = float(data["budget"])
-    if not (isinstance(budget, float)):
-        budget = float(100.00)                  #default budget = $100
+        if (data["budget"] == ""):
+            budget = float(100.00)                  #default budget = $100
+        else:
+            budget = float(data["budget"])
 
 
 
