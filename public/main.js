@@ -167,6 +167,7 @@ window.addEventListener('load', () => {
     
         if (result.success) {
             console.log('File saved successfully:', result.filename);
+            window.location.href = '/result.html';
         } else {
             console.error('Error saving file.');
         }
