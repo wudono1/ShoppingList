@@ -1,5 +1,5 @@
 from WebScraper.eBayParser import get_organic_results
-from WebScraper.amazonParser import get_title, get_price, get_rating, get_review_count
+from WebScraper.amazonParserCaller import get_title, get_price, get_rating, get_review_count
 from WebScraper.alibabaParser import get_title, get_price, get_image, get_rating
 from flask import Flask, render_template, request
 import json

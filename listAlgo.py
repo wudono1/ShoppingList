@@ -45,9 +45,10 @@ def getItemsFindCheapest():
 
     #adding items to final cart
     while (budget > 0.0):
-        budget = shoppingAlgo(budget, cheapestLow, finalShopList)
-        budget = shoppingAlgo(budget, cheapestMed, finalShopList)
         budget = shoppingAlgo(budget, cheapestHi, finalShopList)
+        
+        budget = shoppingAlgo(budget, cheapestMed, finalShopList)
+        budget = shoppingAlgo(budget, cheapestLow, finalShopList)
         break
 
     #writing data to JSON file
