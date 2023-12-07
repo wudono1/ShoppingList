@@ -1,9 +1,21 @@
 {
   "items": [
     {
-      "text": "aweginoa",
+      "text": "socks",
+      "priority": "med"
+    },
+    {
+      "text": "water bottle",
+      "priority": "high"
+    },
+    {
+      "text": "poker",
+      "priority": "low"
+    },
+    {
+      "text": "chair",
       "priority": "high"
     }
   ],
-  "budget": ""
+  "budget": "123"
 }
