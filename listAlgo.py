@@ -55,7 +55,8 @@ def getItemsFindCheapest():
     with open(output_path, 'w') as outfile:
         json.dump(finalShopList, outfile,indent=4)
 
-    return
+    print("Remaining Budget: " + str(budget))
+    return finalShopList
 
 
 def shoppingAlgo(budget, itemList, finalShopList):

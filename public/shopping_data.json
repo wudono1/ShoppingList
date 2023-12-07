@@ -1,4 +1,17 @@
 {
-  "items": [],
+  "items": [
+    {
+      "text": "phone case",
+      "priority": "high"
+    },
+    {
+      "text": "pen",
+      "priority": "med"
+    },
+    {
+      "text": "shoes",
+      "priority": "low"
+    }
+  ],
   "budget": ""
 }
