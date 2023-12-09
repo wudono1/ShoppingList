@@ -14,11 +14,16 @@ from WebScraper.amazon.amazon.spiders.amazonSearchSpider import amazonSearchSpid
 
 def run_spider_amazon(item):
     #Output path for amazon scraper data
-    output_path = os.path.join('scraperData', 'amazonItems.json')
     
+    output_relative_path = os.path.join('..', '..', 'scraperData', 'amazonItems.json')
 
+    output_path = os.path.join('scraperData', 'amazonItems.json')
+    current_directory = os.getcwd()
+    file_path = os.path.join(current_directory, 'scraperData', 'amazonItems.json') 
+    
+    
     #crawler settings
-    '''process = CrawlerProcess(settings={
+    process = CrawlerProcess(settings={
         'BOT_NAME': 'amazon',
         'SPIDER_MODULES': ['WebScraper.amazon.amazon.spiders'],
         'NEWSPIDER_MODULE': 'WebScraper.amazon.amazon.spiders',
@@ -42,7 +47,9 @@ def run_spider_amazon(item):
     amazonSearchSpider.keyword_list = [item]
     process.crawl(amazonSearchSpider)  # Replace AmazonSearchSpider with your spider class name
     process.start()
-'''
+    
+
+    '''
     runner = CrawlerRunner(settings={
         'BOT_NAME': 'amazon',
         'SPIDER_MODULES': ['WebScraper.amazon.amazon.spiders'],
@@ -62,33 +69,5 @@ def run_spider_amazon(item):
             }
         },
     })
-    runner.crawl(amazonSearchSpider)
-    d = runner.join()
-    d.addBoth(lambda _: reactor.stop())
-
 '''
-if __name__ == "__main__":
-    run_spider_amazon("phone case")
-'''
-
-'''
-import sys
-sys.path.append('/Users/donovan/Documents/GitHub/ShoppingList/WebScraper/amazon/amazon')
-from scrapy import signals
-from scrapy.crawler import CrawlerRunner
-from scrapy.signalmanager import dispatcher
-from amazon.amazon.spiders.amazonSearchSpider import AmazonSearchSpider  # Import your spider class
-
-def run_spider():
-    process = CrawlerProcess(settings={
-        'FEED_FORMAT': 'json',  # Example: Output to JSON
-        'FEED_URI': 'output.json'  # Example: Output filename
-        # Add other settings as needed
-    })
-    
-    process.crawl(AmazonSearchSpider)  # Replace AmazonSearchSpider with your spider class name
-    process.start()
-
-if __name__ == "__main__":
-    run_spider()
-'''
+#run_spider_amazon("blanket")

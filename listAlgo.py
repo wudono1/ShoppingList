@@ -13,8 +13,8 @@ def getItemsFindCheapest():
     cheapestHi = []
     finalShopList = []
     
-
-    file_path = 'public/shopping_data.json'     #Opening user input data
+    current_directory = os.getcwd()
+    file_path = os.path.join(current_directory, 'public', 'shopping_data.json')     #Opening user input data
     with open(file_path, 'r') as file:
         data = json.load(file)
         userItems = data["items"]               #finding user items
@@ -96,15 +96,14 @@ def getCheapest(item, priority): #runs scrapers and finds cheapest overall item 
     aliExpressURL = "https://aliexpress.us/w/wholesale-" + f"{item.replace(' ', '-')}" + ".html"
 
     #running amazon spider
+    alieList = get_organic_results_alie(aliExpressURL)
+    eBayList = get_organic_results_ebay(eBayURL)
     run_spider_amazon(amazonURL)
 
     file_path = 'scraperData/amazonItems.json'
     with open(file_path, 'r') as file:      #Opening user input data
         amazonData = json.load(file)
     
-
-    alieList = get_organic_results_alie(aliExpressURL)
-    eBayList = get_organic_results_ebay(eBayURL)
     aliExpressLowest = cheapestFromList(alieList)
     eBayLowest = cheapestFromList(eBayList)
     amazonLowest = cheapestFromList(amazonData)
