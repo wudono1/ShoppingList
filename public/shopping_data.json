@@ -3,7 +3,11 @@
     {
       "text": "socks",
       "priority": "high"
+    },
+    {
+      "text": "blue socks",
+      "priority": "high"
     }
   ],
-  "budget": "10"
+  "budget": "4"
 }
