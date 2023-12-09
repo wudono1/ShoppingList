@@ -28,3 +28,4 @@ Instructions to run:
     Example terminal output for accessing HTML file: 
     donovan@Donovans-MacBook-Pro ShoppingList % node server.js                                                           
     Server is running at http://localhost:3000 <---click on this link
+3. Run the listAlgo.py file. The method should take approximately 30 seconds. The result will be in finalShoppingList.json.
