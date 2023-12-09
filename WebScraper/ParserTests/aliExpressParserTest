@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, Mock
-from ..eBayParser import get_organic_results_ebay
+from ..aliExpressParser import get_organic_results_alie
 
 class TestGetOrganicResults(unittest.TestCase):
 
@@ -21,7 +21,7 @@ class TestGetOrganicResults(unittest.TestCase):
         user_search_URL = "https://www.ebay.com" + f"/sch/{test_item.replace(' ', '+')}"
 
        # Call the function with the mocked request
-        result = get_organic_results_ebay(user_search_URL)
+        result = get_organic_results_alie(user_search_URL)
 
         # Assertions based on the expected behavior
         self.assertIsInstance(result, list)  # Ensure the result is a list
