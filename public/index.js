@@ -1,5 +1,5 @@
 window.addEventListener('load', () => {
-    loadItems(); //loads any items previously saved in shopping list tab
+    //loadItems(); //loads any items previously saved in shopping list tab
 
     //item form
     const item_form = document.querySelector('#new-item-form');
@@ -113,7 +113,7 @@ window.addEventListener('load', () => {
             })
         }
 
-        saveItems();
+        //saveItems();
 
     })
 
@@ -157,23 +157,38 @@ window.addEventListener('load', () => {
         // Convert the JSON object to a JSON string
         const jsonData = JSON.stringify(shoppingData, null, 2);
 
-        const response = await fetch('/save-json', {
+        const shoppingResponse = await fetch('/save-json', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(shoppingData),
         });
+
+        document.getElementById('loading-message').innerText = 'Calculating the best shopping list...';
+
+        // Send the data to the new endpoint that runs the Python script
+        const startShoppingResponse = await fetch('/start-shopping', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(shoppingData),
+        });
+
+        document.getElementById('loading-message').innerText = '';
         
-    
-        const result = await response.json();
-    
-        if (result.success) {
-            console.log('File saved successfully:', result.filename);
-            localStorage.setItem('finalShoppingList', jsonData);
-            window.location.href = '/result.html';
-        } else {
-            console.error('Error saving file.');
+        if (startShoppingResponse.ok) {
+            console.log("response loaded")
+            const startShoppingResult = await startShoppingResponse.json();
+            
+            if (startShoppingResult.success) {
+              console.log('File saved successfully:', startShoppingResult.filename);
+              localStorage.setItem('finalShoppingList', JSON.stringify(startShoppingResult.results));
+              window.location.href = '/result.html';
+            } else {
+              console.error('Error running shopping list algo.');
+            }
         }
     });
 });

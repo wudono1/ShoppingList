@@ -77,7 +77,6 @@ def getItemsFindCheapest():
     with open(output_path, 'w') as outfile:
         json.dump(finalShopList, outfile,indent=4)
 
-    print("Remaining Budget: " + str(budget))
     return finalShopList
 
 
@@ -188,6 +187,8 @@ def run_spider_amazon_la(item):
 
 
 if __name__ == '__main__':
-    print(getItemsFindCheapest())
+    #print(getItemsFindCheapest())
     #getItemsFindCheapest()
-    pass
+
+    results = getItemsFindCheapest()
+    print(json.dumps(results)) 

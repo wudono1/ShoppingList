@@ -1,3 +1,5 @@
+const { exec } = require('child_process');
+
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -25,6 +27,35 @@ app.post('/save-json', express.json(), (req, res) => {
       console.log('JSON file written successfully');
       res.json({ success: true, filename });
     }
+  });
+});
+
+app.post('/start-shopping', express.json(), (req, res) => {
+  const jsonData = req.body;
+
+  fs.writeFile(path.join(__dirname, 'public', 'shopping_data.json'), JSON.stringify(jsonData, null, 2), (err) => {
+    if (err) {
+      console.error('Error writing JSON file:', err);
+      return res.status(500).send('Error writing JSON file');
+    } else {
+      console.log("Shopping data sent to python")
+    }
+
+    // Run the Python script and wait for it to finish
+    exec('python3 listAlgo.py', (error, stdout, stderr) => {
+      if (error) {
+        console.error('Error running listAlgo.py:', stderr);
+        return res.status(500).send('Error running shopping list algorithm');
+      }
+      console.log('Received from Python script:', stdout);
+      try {
+        const results = JSON.parse(stdout);
+        res.json({ success: true, results: results });
+      } catch (parseError) {
+        console.error('Error parsing the output from listAlgo.py:', parseError);
+        return res.status(500).send('Error parsing shopping list algorithm output');
+      }
+    });
   });
 });
 
