@@ -1,9 +1,31 @@
-from WebScraper.eBayParser import get_organic_results_ebay
+'''from WebScraper.eBayParser import get_organic_results_ebay
 from amazonParserCaller import run_spider_amazon
 from WebScraper.aliExpressParser import get_organic_results_alie
 import json
 import sys
+import os'''
+
+import crochet
+crochet.setup()
+
+import sys
 import os
+import json
+current_dir = os.path.dirname(os.path.abspath(__file__))
+amazon_scrapy_dir = os.path.join(current_dir, '..', 'WebScraper', 'amazon', 'amazon')
+sys.path.append(amazon_scrapy_dir)
+#sys.path.append('/ShoppingList/WebScraper/amazon/amazon')
+
+#calls the scrapy amazon spider from within the amazon folder
+from scrapy.crawler import CrawlerProcess
+from scrapy.crawler import CrawlerRunner
+from twisted.internet import reactor
+from WebScraper.amazon.amazon.spiders.amazonSearchSpider import amazonSearchSpider  # Import your spider class
+from WebScraper.eBayParser import get_organic_results_ebay
+from WebScraper.aliExpressParser import get_organic_results_alie
+from amazonParserCaller import run_spider_amazon
+from scrapy.utils.project import get_project_settings
+from twisted.internet.defer import Deferred
 
 def getItemsFindCheapest():
     data = ""
@@ -97,7 +119,8 @@ def getCheapest(item, priority): #runs scrapers and finds cheapest overall item 
     #running amazon spider
     alieList = get_organic_results_alie(aliExpressURL)
     eBayList = get_organic_results_ebay(eBayURL)
-    run_spider_amazon(item) #amazon spider only requires item, not url
+    crochet.wait_for(timeout=60)(run_spider_amazon_la)(item)
+    #run_spider_amazon_la(item) #amazon spider only requires item, not url
 
     file_path = 'scraperData/amazonItems.json'
     with open(file_path, 'r') as file:      #Opening user input data
@@ -130,6 +153,37 @@ def cheapestFromList(scrapeResults):
             lowestListing = listing
     return lowestListing
 
+@crochet.run_in_reactor
+def run_spider_amazon_la(item):
+    #Output path for amazon scraper data
+    
+    output_relative_path = os.path.join('scraperData', 'amazonItems.json')
+
+    output_path = os.path.join('scraperData', 'amazonItems.json')
+    
+    runner = CrawlerRunner(settings={
+        'BOT_NAME': 'amazon',
+        'SPIDER_MODULES': ['WebScraper.amazon.amazon.spiders'],
+        'NEWSPIDER_MODULE': 'WebScraper.amazon.amazon.spiders',
+        'ROBOTSTXT_OBEY': False,
+        'SCRAPEOPS_API_KEY': '25c0074e-bf96-4973-9b74-a23998bb266a',
+        'SCRAPEOPS_PROXY_ENABLED': True,
+        'DOWNLOADER_MIDDLEWARES': {
+            'scrapeops_scrapy.middleware.retry.RetryMiddleware': 550,
+            'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
+            'scrapeops_scrapy_proxy_sdk.scrapeops_scrapy_proxy_sdk.ScrapeOpsScrapyProxySdk': 725,
+        },
+        'FEEDS': {
+            output_path: {
+                'format': 'json',
+                'overwrite': True  # 'TRUE' to True for boolean value
+            }
+        },
+    })
+    
+
+    #amazonSearchSpider.keyword_list = [item]
+    deferred = runner.crawl(amazonSearchSpider, keyword_list=[item])
 
 
 

@@ -1,9 +1,13 @@
 {
   "items": [
     {
-      "text": "scissors",
+      "text": "sticky notes",
+      "priority": "med"
+    },
+    {
+      "text": "desk lamp",
       "priority": "high"
     }
   ],
-  "budget": "60"
+  "budget": "8"
 }
