@@ -1,13 +1,13 @@
 {
   "items": [
     {
-      "text": "sticky notes",
-      "priority": "med"
+      "text": "sdfsdf",
+      "priority": "high"
     },
     {
-      "text": "desk lamp",
-      "priority": "high"
+      "text": "cups",
+      "priority": "med"
     }
   ],
-  "budget": "8"
+  "budget": ""
 }
