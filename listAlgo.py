@@ -157,18 +157,22 @@ def cheapestFromList(scrapeResults):
 #if crochet is not used, twisted will run an error after the listAlgo.py file has been ran multiple times
 @crochet.run_in_reactor
 def run_spider_amazon_la(item):
-    #Output path for amazon scraper data
+    #method for calling amazon scrapy spider from outside a scrapy project framework
+    #filepath of actual spider is /ShoppingList/WebScraper/amazon/amazon/spiders/amazonSearchSpider.py
     
     output_relative_path = os.path.join('scraperData', 'amazonItems.json')
 
     output_path = os.path.join('scraperData', 'amazonItems.json')
     
+
     #crawler custom settings
     runner = CrawlerRunner(settings={
         'BOT_NAME': 'amazon',
         'SPIDER_MODULES': ['WebScraper.amazon.amazon.spiders'],
         'NEWSPIDER_MODULE': 'WebScraper.amazon.amazon.spiders',
         'ROBOTSTXT_OBEY': False,
+
+        #Scrapeops info here; only need to change api key if necessary
         'SCRAPEOPS_API_KEY': '25c0074e-bf96-4973-9b74-a23998bb266a',
         'SCRAPEOPS_PROXY_ENABLED': True,
         'DOWNLOADER_MIDDLEWARES': {

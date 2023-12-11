@@ -14,7 +14,9 @@ headers = {
 }
 
 
-def get_organic_results_alie(user_search_URL):
+def get_organic_results_alie(user_search_URL):  
+    #finds all relevant item results for aliExpress
+
     html = requests.get(user_search_URL, headers=headers).text
     soup = BeautifulSoup(html, 'lxml')
     
@@ -45,7 +47,7 @@ def get_organic_results_alie(user_search_URL):
 
         
     '''
-    #writing data to JSON file
+    #writes data to JSON file, can be uncommented and run for testing purposes
     output_path = os.path.join('scraperData', 'aliExpItemOutput.json')
     with open(output_path, 'w') as outfile:
         json.dump(data, outfile,indent=4)
@@ -57,6 +59,7 @@ def get_organic_results_alie(user_search_URL):
 
 
 '''
+Also for testing purposes, commented out for final
 if __name__ == '__main__':
     
     #item = input("Enter an item: ")

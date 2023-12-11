@@ -46,30 +46,27 @@ def get_organic_results_ebay(user_search_url):
                 {'title': title, 'link': link, 'price': price}
             )
 
-    #writing data to JSON file
+    #writing data to JSON file, can be uncommented to view actual output data
     '''
     output_path = os.path.join('scraperData', 'eBayItemOutput.json')
     with open(output_path, 'w') as outfile:
         json.dump(data, outfile,indent=4)
-'''
-    #print(json.dumps(data, indent = 2, ensure_ascii = False))
-    #print(data)
+    '''
+
+
     return data
-'''
-test_item = "water bottle"
-user_search_URL = "https://www.ebay.com" + f"/sch/{test_item.replace(' ', '+')}"
-results = get_organic_results_ebay(user_search_URL)
-print(results[1])
-'''
+
+
+#can be uncommented out to view actual output
 '''
 if __name__ == '__main__':
     
-    #item = input("Enter an item: ")
+    item = input("Enter an item: ")
     
     test_item = "water bottle"
-    #user_search_URL = "https://www.ebay.com" + f"/sch/{test_item.replace(' ', '+')}"
-    #get_organic_results_ebay(user_search_URL)
-    get_organic_results_ebay(test_item)
+    user_search_URL = "https://www.ebay.com" + f"/sch/{test_item.replace(' ', '+')}"
+    results = get_organic_results_ebay(user_search_URL)
+    print(results)
     
     cov.save
     cov.stop

@@ -3,6 +3,9 @@ import scrapy
 from urllib.parse import urljoin
 
 class amazonSearchSpider(scrapy.Spider):
+    #To find scrapeops API information, navigate to the settings.py file within the amazon subdirectory
+
+    #keyword can be changed here for search bar item
     keyword_list = ['napkins']
     name = "amazon"
     
@@ -15,7 +18,7 @@ class amazonSearchSpider(scrapy.Spider):
         page = response.meta['page']
         keyword = response.meta['keyword'] 
 
-        ## Extract Overview Product Data
+        ## Extract product data
         search_products = response.css("div.s-result-item[data-component-type=s-search-result]")
         for product in search_products:
             relative_url = product.css("h2>a::attr(href)").get()
