@@ -1,9 +1,17 @@
 {
   "items": [
     {
-      "text": "projector",
+      "text": "socks",
+      "priority": "high"
+    },
+    {
+      "text": "shoes",
+      "priority": "low"
+    },
+    {
+      "text": "pants",
       "priority": "high"
     }
   ],
-  "budget": "50"
+  "budget": "4"
 }

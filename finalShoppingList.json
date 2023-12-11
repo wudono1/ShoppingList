@@ -1,16 +1,29 @@
 [
     {
-        "asin": "B0CF1MJDM3",
-        "url": "https://www.amazon.com/clubone-Wool-Socks-Womens-Winter/dp/B0CF1MJDM3/ref=sr_1_48",
-        "title": "Wool Socks - Wool Socks for Women, Thick Womens Wool Socks, Knit Winter Warm Socks,Winter Crew Socks Cozy Socks",
-        "price": 6.99,
-        "keyword": "projector",
+        "title": "\uc5ec\uc131 \ubc0f \ub0a8\uc131 \ubcf4\ud2b8 \uc591\ub9d0, \ubcf4\uc774\uc9c0 \uc54a\ub294 \ub85c\uc6b0 \ucef7 \uc2e4\ub9ac\ucf58 \ubbf8\ub044\ub7fc \ubc29\uc9c0 \ubc1c\ubaa9 \uc591\ub9d0, \ub2e8\uc0c9 \uce90\uc8fc\uc5bc \ud1b5\uae30\uc131 \uc591\ub9d0, \uc5ec\ub984, 10 \uc30d ",
+        "link": "//www.aliexpress.us/item/3256805908910040.html?algo_pvid=29f069fe-8651-4914-bb9c-9700b08bcb81&algo_exp_id=29f069fe-8651-4914-bb9c-9700b08bcb81-0&pdp_npi=4%40dis%21USD%214.66%210.99%21%21%2133.32%21%21%402103205317023331228194883e8d4a%2112000036098743300%21sea%21US%210%21AB&curPageLogUid=gz3bgdHtDp1G",
+        "price": 0.99,
+        "keyword": "socks",
         "priority": "high"
+    },
+    {
+        "title": "Women Print Pants Autumn/Winter New In Lady Clothing Trousers Sport Jogging Fitness Running Trousers Harajuku Streetwear Pants ",
+        "link": "//www.aliexpress.us/item/3256806054266450.html?algo_pvid=429431b2-4ce2-40a4-9923-28e3c427a31f&algo_exp_id=429431b2-4ce2-40a4-9923-28e3c427a31f-0&pdp_npi=4%40dis%21USD%2113.26%211.45%21%21%2194.84%21%21%40210318b917023331335893185e0141%2112000036427327102%21sea%21US%210%21AB&curPageLogUid=emT1jsVydPul",
+        "price": 1.45,
+        "keyword": "pants",
+        "priority": "high"
+    },
+    {
+        "title": "Summer New Women's Slippers Men 2023 Indoor Eva High Soft Bottom Sandals Trend Slides Beach Shoes Couple Slippers Luxury Sandals ",
+        "link": "//www.aliexpress.us/item/3256805917219596.html?algo_pvid=992bb2a4-9b6a-4f28-9fe8-cadaabe675fc&algo_exp_id=992bb2a4-9b6a-4f28-9fe8-cadaabe675fc-8&pdp_npi=4%40dis%21USD%219.66%211.14%21%21%2169.11%21%21%402103223417023331275283644e1794%2112000035756991172%21sea%21US%210%21AB&curPageLogUid=k8CDWkgcHbJn",
+        "price": 1.14,
+        "keyword": "shoes",
+        "priority": "low"
     },
     {
         "title": "remainingUserInputBudget",
         "link": null,
-        "price": 43.01,
+        "price": 0.42,
         "keyword": "remainingUserInputBudget",
         "priority": "high"
     }
