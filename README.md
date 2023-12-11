@@ -5,7 +5,7 @@ GitHub: https://github.com/wudono1/ShoppingList
 
 Extensions and packages needed:
 For web functionality: Need bs4, npm, npm install --save-dev mocha nyc, JSDOM, requests, requests_mock, npm express, node js
-For web scraping/backend: pip (or pip3) install: bs4, scrapy, coverage, unittest2, scrapeops-scrapy, scrapeops-scrapy-proxy-sdk, twisted
+For backend, pip (or pip3) install: bs4, scrapy, coverage, unittest2, scrapeops-scrapy, scrapeops-scrapy-proxy-sdk, twisted, crochet
 
 Web Scraping Notes: 
 1. The Amazon webscraper uses the Scrapy webscraping framework, which is contained within the amazon folder within the WebScraper directory. The web scraping spider has filepath shoppinglist/webscraper/amazon/amazon/spiders/amazonSearchSpider.py, and the spider in that file has name = "amazon". The amazonParserCaller.py file is a file that is able to call the spider from outside the scrapy project directory. 
@@ -20,6 +20,8 @@ Finally, to run either ShoppingList/listAlgo.py or ShoppingList/amaonParserCalle
 2. The eBay, aliExpress, and Alibaba parsers use custom headers to bypass scraping restrictions. If the headers deprecate, there are a variety of headers for beautiful soup to bypass scraping restrictions. These can be found with a Google search.
 
 3. While the current package has four working webscrapers (amazon, aliExpress, eBay, Alibaba), we do not utilize Alibaba. This is because we felt that alibaba's search results were too industrial in nature and would not be useful to a normal customer who would shop through our application. However, since we strongly considered using it, we chose to keep it there instead of deleting it. For aliExpress and eBay, the results of the scrape will appear at the directory ShoppingList/scraperData
+
+
 
 Instructions to run:
 1. make sure the node server is running by entering "node server.js" in the terminal, and clicking on the localhost link.
