@@ -16,7 +16,7 @@
             Shopping List
         </h1>
 
-        <form id = "new-item-form" autocomplete="off">             <!-- for user input -->
+        <form id = "new-item-form" autocomplete="off">             <!-- user input -->
             <!-- textbox to enter item -->
             <input  
                 type = "text"   
@@ -59,6 +59,7 @@
             <h2> Shopping List Items: </h2>
 
             <div id = "items">
+                <!--template for item list design below-->
 
                 <!--
                 <div class = "item">        
@@ -90,6 +91,7 @@
         </section>
 
         <form id = "start-shopping-form">
+            <!--button to call shopping algorithm in index.js-->
             <input
                 type = 'button'
                 id = 'start-shopping-button'
@@ -98,12 +100,13 @@
         </form>
 
         <section id="results-section">
-            <!-- This is where the results will be displayed -->
+            <!-- results of listAlgo.getItemsFindCheapest() displayed here -->
             <h2>Shopping List Results:</h2>
             <div id="results-container"></div>
         </section>
 
         <section class = "loading-message-section">
+            <!-- loading message while algorithm is computing optimal list-->
             <div id="loading-message"></div>
         </section>
 

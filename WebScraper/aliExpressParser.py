@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests, json, lxml
 import coverage
 #Import the code coverage class so data can be run when this class is called
-import os
+import re
 
 
 cov = coverage.Coverage() #for testing

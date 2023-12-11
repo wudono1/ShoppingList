@@ -115,6 +115,7 @@ window.addEventListener('load', () => {
     })
 
     budget_form.addEventListener('submit', (e) => {
+        //logic for submitting a new budget
         e.preventDefault();
 
         const newBudget = budget_input.value;
@@ -130,12 +131,12 @@ window.addEventListener('load', () => {
     });
     
     const startShoppingButton = document.getElementById('start-shopping-button');
-    //open new page when start shopping button is clicked
+    //starts the shopping algorithm in listAlgo.py when start-shopping-button is clicked
     startShoppingButton.addEventListener('click', async () => {
         const resultsContainer = document.getElementById('results-container');
         resultsContainer.innerHTML = '';
 
-        // Collect data from the HTML elements
+        // Getting user input data from HTML
         const items = [];
         const itemList = document.querySelectorAll('.item');
 
@@ -148,7 +149,7 @@ window.addEventListener('load', () => {
 
         const budget = document.getElementById('new-budget-input').value;
 
-        // Create a JSON object with the collected data
+        // Creating a JSON object with the collected data
         const shoppingData = {
             items,
             budget,
@@ -157,6 +158,7 @@ window.addEventListener('load', () => {
         // Convert the JSON object to a JSON string
         const jsonData = JSON.stringify(shoppingData, null, 2);
 
+        //turns user input into json File for listAlgo.py to take as input
         const shoppingResponse = await fetch('/save-json', {
             method: 'POST',
             headers: {
@@ -165,9 +167,10 @@ window.addEventListener('load', () => {
             body: JSON.stringify(shoppingData),
         });
 
+        //displays loading message while final shopping list is being calculated
         document.getElementById('loading-message').innerText = 'Finding your optimal shopping list...';
 
-        // Send the data to the new endpoint that runs the Python script
+        // Send the data to backend and triggers listAlgo to start searching online
         const startShoppingResponse = await fetch('/start-shopping', {
           method: 'POST',
           headers: {
@@ -176,14 +179,21 @@ window.addEventListener('load', () => {
           body: JSON.stringify(shoppingData),
         });
 
-        document.getElementById('loading-message').innerText = '';
+
         
         if (startShoppingResponse.ok) {
+            //checks if startShoppingResponse is valid response to prevent asynchronization issues
+
+            //deletes loading message when startShoppingResponse loads valid shopping list
+            document.getElementById('loading-message').innerText = '';
             console.log("response loaded")
             const startShoppingResult = await startShoppingResponse.json();
             
+            //checks if valid response, else loads error
             if (startShoppingResult.success) {
               console.log('File saved successfully:', startShoppingResult.filename);
+
+              //displaying items on webpage
               localStorage.setItem('finalShoppingList', JSON.stringify(startShoppingResult.results));
               displayResults(startShoppingResult.results);
             } else {
@@ -195,49 +205,53 @@ window.addEventListener('load', () => {
 
 
 function displayResults(results) {
-    // Get the container where results will be displayed
+    // Getting results section
     const resultsContainer = document.getElementById('results-container');
 
-    // Clear any previous results
+    // Clear previous search results
     resultsContainer.innerHTML = '';
 
-    // Create elements for each result and append to the container
+    // Create correctly formatted items for each result
     results.forEach(result => {
+
         if (result.keyword === "remainingUserInputBudget") {
-            // Create a special display for the remaining budget
+            // checks if result is the remaining budget result and displays it on the webpage
+
             const budgetEl = document.createElement('div');
-            //budgetEl.classList.add('keyword');
             budgetEl.innerHTML = `<strong>Budget remaining: $</strong>${result.price}`;
-            resultsContainer.appendChild(budgetEl); // Append the budget info to the container
+
+            resultsContainer.appendChild(budgetEl); // Adding budget info to container
         } else {
+            //If result item is not budget, create a regular item result div for it
+
             const resultEl = document.createElement('div');
             resultEl.classList.add('result-item');
 
-            // Create and append the keyword span
+            // Adds item keyword, which is the item that the user inputted into the webpage
             const keywordSpan = document.createElement('span');
             keywordSpan.classList.add('keyword');
             keywordSpan.textContent = result.keyword;
             resultEl.appendChild(keywordSpan);
 
-            // Create and append the priority span
+            // Adds item priority, which was user-inputted as well
             const prioritySpan = document.createElement('span');
             prioritySpan.classList.add('priority');
             prioritySpan.textContent = `Priority: ${result.priority}`;
             resultEl.appendChild(prioritySpan);
 
-            // Create and append the price span
+            // Adds price of item as found on the online listing
             const priceSpan = document.createElement('span');
             priceSpan.classList.add('price');
             priceSpan.textContent = `Price: $${result.price}`;
             resultEl.appendChild(priceSpan);
 
-            // Create and append the buy link
+            // Link to online item listing
             const buyLink = document.createElement('span');
             buyLink.classList.add('buy-link');
             buyLink.innerHTML = `<a href="${result.link}" target="_blank">Link here</a>`;
             resultEl.appendChild(buyLink);
 
-            // Append the result item to the container
+            // Append the item result div to correct section
             resultsContainer.appendChild(resultEl);
         }
 

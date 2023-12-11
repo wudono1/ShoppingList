@@ -11,7 +11,9 @@ app.use(express.static('public')); // Serve static files from the 'public' direc
 
 const filename = 'shopping_data.json'; // Use a fixed filename
 
+
 app.post('/save-json', express.json(), (req, res) => {
+  //saving user input data from html to json file
   const jsonData = req.body;
 
   // Create a unique filename (you can customize this logic)
@@ -31,6 +33,8 @@ app.post('/save-json', express.json(), (req, res) => {
 });
 
 app.post('/start-shopping', express.json(), (req, res) => {
+  //logic for pressing button and starting listAlgo.yp
+
   const jsonData = req.body;
 
   fs.writeFile(path.join(__dirname, 'public', 'shopping_data.json'), JSON.stringify(jsonData, null, 2), (err) => {

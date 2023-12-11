@@ -1,12 +1,7 @@
-'''from WebScraper.eBayParser import get_organic_results_ebay
-from amazonParserCaller import run_spider_amazon
-from WebScraper.aliExpressParser import get_organic_results_alie
-import json
-import sys
-import os'''
-
 import crochet
 crochet.setup()
+#for running amazon spider scraper multiple times
+
 
 import sys
 import os
@@ -14,18 +9,12 @@ import json
 current_dir = os.path.dirname(os.path.abspath(__file__))
 amazon_scrapy_dir = os.path.join(current_dir, '..', 'WebScraper', 'amazon', 'amazon')
 sys.path.append(amazon_scrapy_dir)
-#sys.path.append('/ShoppingList/WebScraper/amazon/amazon')
 
 #calls the scrapy amazon spider from within the amazon folder
-from scrapy.crawler import CrawlerProcess
 from scrapy.crawler import CrawlerRunner
-from twisted.internet import reactor
 from WebScraper.amazon.amazon.spiders.amazonSearchSpider import amazonSearchSpider  # Import your spider class
 from WebScraper.eBayParser import get_organic_results_ebay
 from WebScraper.aliExpressParser import get_organic_results_alie
-from amazonParserCaller import run_spider_amazon
-from scrapy.utils.project import get_project_settings
-from twisted.internet.defer import Deferred
 
 def getItemsFindCheapest():
     data = ""
@@ -72,6 +61,7 @@ def getItemsFindCheapest():
         budget = shoppingAlgo(budget, cheapestLow, finalShopList)
         break
 
+    #appending remaining budget to final shopping list
     finalShopList.append(
         {"title": "remainingUserInputBudget", "link": None, "price": round(budget, 2), "keyword": "remainingUserInputBudget", "priority": "high"})
 
@@ -84,7 +74,10 @@ def getItemsFindCheapest():
 
 
 def shoppingAlgo(budget, itemList, finalShopList):
+    #for item in list
     for item in itemList:
+
+        #check if budget more or less than price
         if budget >= item["price"]:
             finalShopList.append(item)
             budget -= item["price"]
@@ -95,6 +88,8 @@ def shoppingAlgo(budget, itemList, finalShopList):
 
 
 def insertionSort(itemList):
+    #sorts items by price from least to greatest
+
     for i in range(1, len(itemList)):
         key = itemList[i]
         keyVal = itemList[i]["price"]
@@ -135,6 +130,7 @@ def getCheapest(item, priority): #runs scrapers and finds cheapest overall item 
     num2 = aliExpressLowest
     num3 = amazonLowest
 
+    #comparing cheapest item from each site to find overall cheapest
     if (eBayLowest['price'] < aliExpressLowest['price']) and (eBayLowest['price'] < amazonLowest['price']):
         cheapestOvr = eBayLowest
     elif (aliExpressLowest['price'] < eBayLowest['price']) and (aliExpressLowest['price'] < amazonLowest['price']):
@@ -147,6 +143,8 @@ def getCheapest(item, priority): #runs scrapers and finds cheapest overall item 
 
 
 def cheapestFromList(scrapeResults):
+    #finding cheapest item from each site scrape
+
     lowestPrice = 10000000
     lowestListing = ""
     for listing in scrapeResults:
@@ -155,6 +153,8 @@ def cheapestFromList(scrapeResults):
             lowestListing = listing
     return lowestListing
 
+
+#if crochet is not used, twisted will run an error after the listAlgo.py file has been ran multiple times
 @crochet.run_in_reactor
 def run_spider_amazon_la(item):
     #Output path for amazon scraper data
@@ -163,6 +163,7 @@ def run_spider_amazon_la(item):
 
     output_path = os.path.join('scraperData', 'amazonItems.json')
     
+    #crawler custom settings
     runner = CrawlerRunner(settings={
         'BOT_NAME': 'amazon',
         'SPIDER_MODULES': ['WebScraper.amazon.amazon.spiders'],
@@ -175,6 +176,8 @@ def run_spider_amazon_la(item):
             'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
             'scrapeops_scrapy_proxy_sdk.scrapeops_scrapy_proxy_sdk.ScrapeOpsScrapyProxySdk': 725,
         },
+
+        #tells crawler where to put amazon data as json file
         'FEEDS': {
             output_path: {
                 'format': 'json',
@@ -194,4 +197,6 @@ if __name__ == '__main__':
     #getItemsFindCheapest()
 
     results = getItemsFindCheapest()
+
+    #logs to console for server.js to take
     print(json.dumps(results)) 

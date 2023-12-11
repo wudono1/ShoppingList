@@ -49,6 +49,7 @@ Instructions to run:
 3. In the textbox that displays "Enter item here...", enter a word or phrase for the item that you want to buy. Generally, being more specific when entering an item may allow for more pertinent results. Once you have entered an item, the item will appear under the "Shopping List Items" section. You may toggle the priority of the item between "high", "medium", and "low", depending on how much you want to buy that item. When finding your items online, the webscraper will first fit high-priority items into your budget until there are no more high-priority items that fit under the remaining budget. It will do the same with all medium- and all low- priority items, in that order. 
 
 If you want to change you item description, you may press the "edit" button to do so, and press the "save" button that appears afterwards to save your changes. if you no longer want to look for that item, pressing the "delete" button will remove that item from your shopping list.
+NOTE: If you decide to edit your item, you MUST press "save" to save your changes, otherwise they will not be saved
 
 You may also enter a maximum budget in USD into the "budget" textbox that the website will not exceed when shopping for your items. If you don't enter a budget, the site will default to a $100 budget. Once you press the "Find your items online!" button, the user input data will appear at ShoppingList/public/shopping_data.json.
 
