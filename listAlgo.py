@@ -91,14 +91,13 @@ def getCheapest(item, priority): #runs scrapers and finds cheapest overall item 
 
     
     #making URL for each site
-    amazonURL = "https://www.amazon.com" + f"/s?k={item.replace(' ', '+')}"
     eBayURL = "https://www.ebay.com" + f"/sch/{item.replace(' ', '+')}"
     aliExpressURL = "https://aliexpress.us/w/wholesale-" + f"{item.replace(' ', '-')}" + ".html"
 
     #running amazon spider
     alieList = get_organic_results_alie(aliExpressURL)
     eBayList = get_organic_results_ebay(eBayURL)
-    run_spider_amazon(amazonURL)
+    run_spider_amazon(item) #amazon spider only requires item, not url
 
     file_path = 'scraperData/amazonItems.json'
     with open(file_path, 'r') as file:      #Opening user input data

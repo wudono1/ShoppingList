@@ -69,5 +69,14 @@ def run_spider_amazon(item):
             }
         },
     })
+    amazonSearchSpider.keyword_list = [item]
+    runner = CrawlerRunner()
+
+    d = runner.crawl("amazon")
+    d.addBoth(lambda _: reactor.stop())
+    reactor.run()  # the script will block here until the crawling is finished
+    '''
+
+'''if __name__ == "__main__":
+    run_spider_amazon("phone case")
 '''
-#run_spider_amazon("blanket")
