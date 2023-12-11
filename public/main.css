@@ -250,37 +250,97 @@ main {
 .dropdown {
     position: relative;
     display: inline-block;
-  }
+}
   
-  .dropbtn {
+.dropbtn {
     background-color: #3498db;
     color: white;
     padding: 10px;
     border: none;
     cursor: pointer;
-  }
-  
-  .dropdown-content {
+}
+
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-  }
-  
-  .dropdown-content a {
+}
+
+.dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-  }
-  
-  .dropdown-content a:hover {
+}
+
+.dropdown-content a:hover {
     background-color: #ddd;
-  }
-  
-  .dropdown:hover .dropdown-content {
+}
+
+.dropdown:hover .dropdown-content {
     display: block;
-  }
+}
+
+#results-section {
+    padding: 1rem;
+}
+
+#results-section h2 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    color: var(--gray);
+}
   
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--darkest);
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
+.result-item .keyword, .result-item .priority, .result-item .price {
+    color: var(--light);
+    font-size: 1.125rem;
+    width: 100%;
+    flex: 1 1 0%;
+    display: block;
+    transition: .4s;
+    background-color: var(--darkest);
+    border: none;
+}
+
+.result-item .priority,
+.result-item .price,
+.result-item .buy-link {
+    margin-left: 10px; /* Adjust the spacing as needed */
+}
+
+.result-item .buy-link a {
+    text-transform: unset !important;
+    cursor: pointer;
+    margin: 0 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: .4s;
+    color: crimson;
+}
+
+.result-item .buy-link:hover {
+    opacity: .8;
+}
+
+.result-item .buy-link:active {
+    opacity: .6;
+}
+
+/* Ensure that the Sample Result text is white */
+/*.result-item .keyword {
+    color: white;
+}*/

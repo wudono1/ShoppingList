@@ -1,9 +1,17 @@
 {
   "items": [
     {
-      "text": "napkins",
+      "text": "sweatshirt",
+      "priority": "high"
+    },
+    {
+      "text": "socks",
+      "priority": "low"
+    },
+    {
+      "text": "monkey ",
       "priority": "high"
     }
   ],
-  "budget": "23"
+  "budget": "2"
 }

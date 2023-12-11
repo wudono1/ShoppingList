@@ -132,6 +132,9 @@ window.addEventListener('load', () => {
     const startShoppingButton = document.getElementById('start-shopping-button');
     //open new page when start shopping button is clicked
     startShoppingButton.addEventListener('click', async () => {
+        const resultsContainer = document.getElementById('results-container');
+        resultsContainer.innerHTML = '';
+
         // Collect data from the HTML elements
         const items = [];
         const itemList = document.querySelectorAll('.item');
@@ -162,7 +165,7 @@ window.addEventListener('load', () => {
             body: JSON.stringify(shoppingData),
         });
 
-        document.getElementById('loading-message').innerText = 'Calculating the best shopping list...';
+        document.getElementById('loading-message').innerText = 'Finding your optimal shopping list...';
 
         // Send the data to the new endpoint that runs the Python script
         const startShoppingResponse = await fetch('/start-shopping', {
@@ -200,17 +203,43 @@ function displayResults(results) {
 
     // Create elements for each result and append to the container
     results.forEach(result => {
-        const resultEl = document.createElement('div');
-        resultEl.classList.add('result-item');
+        if (result.keyword === "remainingUserInputBudget") {
+            // Create a special display for the remaining budget
+            const budgetEl = document.createElement('div');
+            //budgetEl.classList.add('keyword');
+            budgetEl.innerHTML = `<strong>Budget remaining: $</strong>${result.price}`;
+            resultsContainer.appendChild(budgetEl); // Append the budget info to the container
+        } else {
+            const resultEl = document.createElement('div');
+            resultEl.classList.add('result-item');
 
-        // Populate the result item with data
-        resultEl.innerHTML = `
-            <p><strong>Item:</strong> ${result.keyword}</p>
-            <p><strong>Price:</strong> $${result.price}</p>
-            <p><a href="${result.link}" target="_blank">Buy Now</a></p>
-        `;
+            // Create and append the keyword span
+            const keywordSpan = document.createElement('span');
+            keywordSpan.classList.add('keyword');
+            keywordSpan.textContent = result.keyword;
+            resultEl.appendChild(keywordSpan);
 
-        // Append the result item to the container
-        resultsContainer.appendChild(resultEl);
+            // Create and append the priority span
+            const prioritySpan = document.createElement('span');
+            prioritySpan.classList.add('priority');
+            prioritySpan.textContent = `Priority: ${result.priority}`;
+            resultEl.appendChild(prioritySpan);
+
+            // Create and append the price span
+            const priceSpan = document.createElement('span');
+            priceSpan.classList.add('price');
+            priceSpan.textContent = `Price: $${result.price}`;
+            resultEl.appendChild(priceSpan);
+
+            // Create and append the buy link
+            const buyLink = document.createElement('span');
+            buyLink.classList.add('buy-link');
+            buyLink.innerHTML = `<a href="${result.link}" target="_blank">Link here</a>`;
+            resultEl.appendChild(buyLink);
+
+            // Append the result item to the container
+            resultsContainer.appendChild(resultEl);
+        }
+
     });
 }

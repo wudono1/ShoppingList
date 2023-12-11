@@ -72,6 +72,9 @@ def getItemsFindCheapest():
         budget = shoppingAlgo(budget, cheapestLow, finalShopList)
         break
 
+    finalShopList.append(
+        {"title": "remainingUserInputBudget", "link": None, "price": round(budget, 2), "keyword": "remainingUserInputBudget", "priority": "high"})
+
     #writing data to JSON file
     output_path = os.path.join('finalShoppingList.json')
     with open(output_path, 'w') as outfile:
