@@ -1,13 +1,9 @@
 {
   "items": [
     {
-      "text": "shoes",
-      "priority": "high"
-    },
-    {
-      "text": "socks",
+      "text": "television",
       "priority": "high"
     }
   ],
-  "budget": "25"
+  "budget": "10000"
 }

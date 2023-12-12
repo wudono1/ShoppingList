@@ -28,7 +28,7 @@ class amazonSearchSpider(scrapy.Spider):
             if (product_url != "https://www.amazon.com/sspa/click" and product_url != None and asin != None and price_string != None):
                 yield  {
                         "asin": asin,
-                        "url": product_url,
+                        "link": product_url,
                         "title": product.css("h2>a>span::text").get(),
                         "price": float(price_string[price_string.rfind("$") + 1:]),
                     }
